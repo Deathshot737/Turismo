@@ -32,60 +32,41 @@ API desarrollada para gestionar reservas, usuarios y servicios turísticos. Cons
 
 ## 🛠 Instalación
 
+Sigue estos pasos para instalar y configurar el proyecto. Todos los comandos están listos para copiar y pegar.
+
 1. **Clona el repositorio:**
 
     ```bash
     git clone https://github.com/Deathshot737/Turismo.git
-    cd turismo
+    cd Turismo
     ```
 
-2. **Configura el entorno Python:**
+2. **Verifica que Python esté instalado:**
 
-    Puedes trabajar de dos formas:
+    ```bash
+    python --version
+    ```
 
-    a. **Usar el intérprete de Python directamente:**
+3. **Crea y activa un entorno virtual:**
 
-        Verifica que Python esté instalado:
-
-        ```bash
-        python --version
-        ```
-
-    b. **Usar un entorno virtual aislado:**
-
-        Verifica que Python esté instalado:
-
-        ```bash
-        python --version
-        ```
-
-        Crea el entorno virtual:
-
+    - **Windows:**
         ```bash
         python -m venv .venv
+        .venv\Scripts\activate
+        ```
+    - **Linux/MacOS:**
+        ```bash
+        python3 -m venv .venv
+        source .venv/bin/activate
         ```
 
-        Activa el entorno virtual:
-
-        - En Windows:
-
-          ```bash
-          .venv\Scripts\activate
-          ```
-
-        - En Linux/MacOS:
-
-          ```bash
-          source .venv/bin/activate
-          ```
-
-    Instala las dependencias necesarias:
+4. **Instala las dependencias necesarias:**
 
     ```bash
     pip install -r api/requirements.txt
     ```
 
-3. **Modifica el archivo `.env` (si es necesario):**
+5. **Modifica el archivo `.env` (si es necesario):**
 
     Ajusta las siguientes variables según tu configuración:
 
