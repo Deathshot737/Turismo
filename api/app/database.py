@@ -7,6 +7,7 @@ from config import settings
 
 # Importa todos los modelos para que SQLAlchemy los registre
 from app.models import *
+from sqlalchemy import inspect
 
 # Configuración de la base de datos
 DATABASE_URL = settings.DATABASE_URL
@@ -17,7 +18,7 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 Base = declarative_base()
 
 # Dependencia para obtener la sesión de la base de datos
-def get_db():
+async def get_db():
     db = SessionLocal()
     try:
         yield db
@@ -39,5 +40,11 @@ def test_connection():
 # Importa todos los modelos que heredan de Base
 def init_db():  
     if test_connection():
-        Base.metadata.create_all(bind=engine)
-        print("Base de datos inicializada.")
+        # Verifica si la tabla existe, si no, la crea
+        inspector = inspect(engine)
+        tablas_existentes = inspector.get_table_names()
+        if not tablas_existentes:
+            Base.metadata.create_all(bind=engine)
+            print("Base de datos inicializada.")
+        else:
+            print("Las tablas ya existen:", tablas_existentes)

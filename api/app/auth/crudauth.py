@@ -7,7 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException, status
 
 # Crear un nuevo usuario con contraseña hasheada
-def crear_usuario(db, usuario):
+async def create_user(db, usuario):
 
     # Verificar si el email ya está registrado
     existente = db.query(models.Usuario).filter_by(email=usuario.email).first()
@@ -47,8 +47,14 @@ def crear_usuario(db, usuario):
 
 
 # Autenticar usuario verificando email y contraseña
-def autenticar_usuario(db, email, password):
+async def auth_user(db, email, password):
     usuario = db.query(models.Usuario).filter(models.Usuario.email == email).first()
-    if usuario and auth.verify_password(password, usuario.password_hash):
+    if usuario and await auth.verify_password(password, usuario.password_hash):
         return usuario
     return None
+
+async def get_all_users(db):
+    return db.query(models.Usuario).all()
+
+async def get_user_by_email(db, email):
+    return db.query(models.Usuario).filter(models.Usuario.email == email).first()

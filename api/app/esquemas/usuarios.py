@@ -20,6 +20,7 @@ class UsuarioLogin(BaseModel):
 # Esquema para salida de usuario que excluye la contraseña
 class UsuarioOut(UsuarioBase):
     id: int
+    email: str
     es_activo: bool
     es_admin: bool
 
