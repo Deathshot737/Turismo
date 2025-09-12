@@ -1,0 +1,667 @@
+/* Home.css - Estilo mejorado para turismo de Nicaragua */
+
+
+/* Variables de colores inspirados en Nicaragua */
+
+:root {
+    --nicaragua-blue: #0072ce;
+    --nicaragua-blue-light: #4a9de3;
+    --nicaragua-white: #ffffff;
+    --nicaragua-sand: #f0e6d2;
+    --nicaragua-volcano: #2c5c2f;
+    --nicaragua-sunset: #f4a261;
+    --nicaragua-sunset-dark: #e76f51;
+    --nicaragua-text: #333333;
+}
+
+
+/* Estilos generales */
+
+.home-container {
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--nicaragua-text);
+}
+
+.background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, var(--nicaragua-blue-light) 0%, var(--nicaragua-blue) 100%);
+}
+
+
+/* Navbar con estilo nicaragüense */
+
+
+/* Forzar que TODO el navbar quede fijo */
+
+.nicaragua-navbar.navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1050 !important;
+    /* sobre los demás elementos */
+    background-color: var(--nicaragua-blue) !important;
+    /* asegúrate que tenga fondo */
+}
+
+
+/* Botones con estilo tropical */
+
+.btn-nicaragua {
+    background: linear-gradient(45deg, var(--nicaragua-sunset), var(--nicaragua-sunset-dark));
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 0.6rem 1.5rem;
+    box-shadow: 0 4px 10px rgba(231, 111, 81, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-nicaragua:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(231, 111, 81, 0.4);
+    background: linear-gradient(45deg, var(--nicaragua-sunset-dark), var(--nicaragua-sunset));
+    color: white;
+}
+
+.btn-hero {
+    background: linear-gradient(45deg, var(--nicaragua-blue), var(--nicaragua-blue-light));
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 0.8rem 2rem;
+    box-shadow: 0 4px 15px rgba(0, 114, 206, 0.3);
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.btn-hero:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 114, 206, 0.4);
+    background: linear-gradient(45deg, var(--nicaragua-blue-light), var(--nicaragua-blue));
+    color: white;
+}
+
+
+/* Carrusel mejorado */
+
+.nicaragua-carousel {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    overflow: hidden;
+    /* importante para que la imagen no sobresalga */
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* mantiene proporciones y llena el contenedor */
+    image-rendering: auto;
+    /* suaviza la imagen */
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+    /* para que no bloquee clics */
+}
+
+.carousel-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 10;
+    width: 80%;
+    max-width: 800px;
+}
+
+.carousel-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeInDown 1s ease;
+}
+
+.carousel-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.carousel-indicators button {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+    background: var(--nicaragua-white);
+    transform: scale(1.2);
+}
+
+.carousel-indicators button:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+
+/* Sección de bienvenida */
+
+.welcome-section {
+    padding: 5rem 0;
+    background: var(--nicaragua-white);
+    position: relative;
+}
+
+.welcome-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--nicaragua-blue);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.welcome-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(45deg, var(--nicaragua-sunset), var(--nicaragua-sunset-dark));
+    border-radius: 2px;
+}
+
+.welcome-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: var(--nicaragua-blue);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.feature-item h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--nicaragua-blue);
+    margin-bottom: 0.8rem;
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+.image-frame {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.image-frame::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid var(--nicaragua-sand);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.image-frame {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.image-frame img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+    image-rendering: -webkit-optimize-contrast;
+    backface-visibility: hidden;
+}
+
+.image-frame:hover img {
+    transform: scale(1.05);
+}
+
+.frame-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 114, 206, 0.1) 0%, rgba(244, 162, 97, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-frame:hover .frame-overlay {
+    opacity: 1;
+}
+
+
+/* Animaciones */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(-50%, -60%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(-50%, -50%, 0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 30px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+
+/* Media queries para responsividad :cite[3]:cite[6] */
+
+@media (max-width: 992px) {
+    .carousel-content h1 {
+        font-size: 2.8rem;
+    }
+    .carousel-content p {
+        font-size: 1.3rem;
+    }
+    .welcome-section {
+        padding: 4rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .nicaragua-navbar .navbar-nav {
+        background: rgba(0, 114, 206, 0.95);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 0.5rem;
+    }
+    .nicaragua-navbar .nav-link {
+        margin: 0.3rem 0;
+        text-align: center;
+    }
+    .carousel-content h1 {
+        font-size: 2.2rem;
+    }
+    .carousel-content p {
+        font-size: 1.1rem;
+    }
+    .btn-hero {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+    }
+    .welcome-section h2 {
+        font-size: 2rem;
+    }
+    .feature-item {
+        padding: 1.2rem 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .nicaragua-navbar .navbar-brand {
+        font-size: 1.5rem;
+    }
+    .carousel-content {
+        width: 90%;
+    }
+    .carousel-content h1 {
+        font-size: 1.8rem;
+    }
+    .carousel-content p {
+        font-size: 1rem;
+    }
+    .carousel-indicators {
+        bottom: 20px;
+    }
+    .welcome-section {
+        padding: 3rem 0;
+    }
+    .welcome-section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+
+/* Mejoras de accesibilidad */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* Modo oscuro opcional */
+
+@media (prefers-color-scheme: dark) {
+    .welcome-section {
+        background: #1a1a1a;
+        color: #f0f0f0;
+    }
+    .feature-item:hover {
+        background: #2a2a2a;
+    }
+    .feature-item p {
+        color: #ccc;
+    }
+    .welcome-section h2 {
+        color: var(--nicaragua-blue-light);
+    }
+}
+
+.carousel img {
+    width: 100%;
+    height: 500px;
+    /* ajusta a la altura que quieras */
+    object-fit: cover;
+    /* mantiene proporciones, sin distorsión */
+}
+
+.carousel img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    image-rendering: -webkit-optimize-contrast;
+    /* mejora nitidez */
+}
+
+
+/* Efectos 3D y Parallax inspirados en Nicaragua */
+
+
+/* Selector de idiomas */
+
+.navbar .dropdown-menu {
+    background-color: var(--nicaragua-blue);
+    border: none;
+}
+
+.navbar .dropdown-item {
+    color: white;
+}
+
+.navbar .dropdown-item:hover {
+    background-color: var(--nicaragua-blue-light);
+    color: white;
+}
+
+
+/* Barra de búsqueda */
+
+.search-bar-container {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.search-bar-container .input-group {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.search-bar-container .form-control {
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+}
+
+.search-bar-container .form-control:focus {
+    box-shadow: none;
+}
+
+.search-bar-container .btn {
+    border-radius: 0 30px 30px 0;
+    padding: 0.8rem 1.5rem;
+}
+
+
+/* Frase motivacional */
+
+.motivational-quote {
+    margin: 1.5rem 0;
+    font-style: italic;
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+
+/* Sección de destinos */
+
+.destinations-section {
+    background: white;
+}
+
+.categories-filter {
+    margin-bottom: 2rem;
+}
+
+.btn-outline-nicaragua {
+    color: var(--nicaragua-blue);
+    border-color: var(--nicaragua-blue);
+}
+
+.btn-outline-nicaragua:hover {
+    background-color: var(--nicaragua-blue);
+    color: white;
+}
+
+.destination-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.destination-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.destination-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.destination-card .card-footer {
+    background: white;
+    border-top: none;
+}
+
+
+/* Mapas interactivos */
+
+.map-container {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+
+/* Tours y experiencias */
+
+.tour-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.tour-card:hover {
+    transform: translateY(-5px);
+}
+
+.tour-card .price {
+    font-weight: bold;
+    color: var(--nicaragua-blue);
+}
+
+
+/* Testimonios */
+
+.testimonials-section .testimonial-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.testimonials-section .user-avatar {
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+.bg-nicaragua-blue {
+    background-color: var(--nicaragua-blue);
+}
+
+
+/* Eventos */
+
+.event-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+
+/* Footer */
+
+.footer {
+    background: linear-gradient(135deg, var(--nicaragua-blue) 0%, var(--nicaragua-volcano) 100%);
+}
+
+.footer a:hover {
+    color: var(--nicaragua-sand) !important;
+}
+
+.footer .social-icons a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+
+/* Responsividad adicional */
+
+@media (max-width: 768px) {
+    .search-bar-container {
+        top: 80px;
+        padding: 0 15px;
+    }
+    .search-bar-container .col-md-8 {
+        padding: 0;
+    }
+    .motivational-quote {
+        font-size: 1rem;
+        margin: 1rem 0;
+    }
+}
