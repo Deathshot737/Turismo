@@ -1,7 +1,11 @@
 # Módulo de autenticación: manejo de contraseñas y tokens JWT
+from fastapi import HTTPException
 from jose import jwt
 from passlib.hash import bcrypt
 from datetime import datetime, timedelta
+
+# Importar modelo de usuario para consultas
+from app.models import UserModel
 
 # Importar configuración
 from config import settings
@@ -37,3 +41,13 @@ async def decode_token(token: str):
         return None  # El token ha expirado
     except jwt.JWTError:
         return None  # Token inválido
+    
+# Obtener usuario autenticado a partir del token
+async def get_authenticated_user(db, token: str):
+    payload = await decode_token(token)
+    print(payload)
+    if not payload:
+        raise HTTPException(status_code=401, detail="El token ha expirado o es inválido")
+    if not payload:
+        raise HTTPException(status_code=401, detail="Usuario no autenticado")
+    return await UserModel.get_user_by_email(db, payload.get("sub"))
