@@ -6,7 +6,7 @@ from sqlalchemy.sql import func
 from app.database import Base
 
 # Definición del modelo Usuario
-class Usuario(Base):
+class usermodel(Base):
     __tablename__ = "usuarios"
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String(100), nullable=False)
