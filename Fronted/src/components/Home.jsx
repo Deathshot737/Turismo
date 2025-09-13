@@ -8,6 +8,8 @@ import fondo4 from '../img/fondo4.jpg';
 import fondo5 from '../img/fondo5.jpg';
 import fondo6 from '../img/fondo6.jpg';
 import fondo7 from '../img/fondo7.jpg';
+import lagoNicaragua from '../img/nicaragua.png';
+
 
 // Importar imágenes para destinos
 import granadaImg from '../img/granada.jpg';
@@ -36,8 +38,12 @@ function Home() {
       title: "Descubre la Belleza de Nicaragua",
       subtitle: "Playas paradisíacas, volcanes imponentes y una cultura vibrante te esperan en el corazón de Centroamérica.",
       exploreTours: "Explorar Tours",
-      welcomeTitle: "Explora Destino Nicaragua",
-      welcomeText: "Nicaragua, tierra de lagos y volcanes, ofrece una experiencia única para los amantes de la naturaleza, la cultura y la aventura.",
+      welcomeTitle: "Historia de Nicaragua",
+      welcomeText: `Nicaragua, tierra de lagos y volcanes, ofrece una experiencia única para los amantes de la naturaleza, la cultura y la aventura. 
+      Desde tiempos precolombinos, fue habitada por diversas culturas indígenas como los Nicaraos y los Chorotegas, quienes dejaron un rico legado cultural. 
+      En el siglo XVI, los españoles llegaron y fundaron ciudades como Granada y León, fusionando tradiciones europeas e indígenas. 
+      A lo largo de su historia, Nicaragua ha vivido momentos de gran resistencia, independencia y transformación, forjando una identidad única que se refleja en su arte, su música y su folclore. 
+      Hoy, los visitantes pueden explorar sus majestuosos volcanes, lagos impresionantes y ciudades coloniales, conectando con la historia viva del país.`,
       beaches: "Playas",
       beachesDesc: "Disfruta de las mejores playas del Pacífico y Caribe",
       volcanoes: "Volcanes",
@@ -461,72 +467,114 @@ function Home() {
       <canvas ref={canvasRef} className="background-canvas"></canvas>
       
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark fixed-top nicaragua-navbar">
-        <div className="container">
-          <Link className="navbar-brand animate__animated animate__fadeInLeft" to="/">
-            <i className="fas fa-globe-americas me-2"></i>MundoViajero
+<nav className="navbar navbar-expand-lg navbar-dark fixed-top nicaragua-navbar" style={{background: 'linear-gradient(135deg, #006ecc 0%, #0052a3 100%)', boxShadow: '0 2px 15px rgba(0, 0, 0, 0.2)'}}>
+  <div className="container">
+    <Link className="navbar-brand animate__animated animate__fadeInLeft" to="/" style={{fontWeight: 'bold', fontSize: '1.4rem'}}>
+      <i className="fas fa-globe-americas me-2" style={{color: '#ffcc00'}}></i>E D N
+    </Link>
+    <button
+      className="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-label="Toggle navigation"
+    >
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarNav">
+      <ul className="navbar-nav ms-auto">
+        <li className="nav-item">
+          <Link className="nav-link active" to="/" style={{position: 'relative', padding: '0.5rem 1rem', margin: '0 0.2rem', borderRadius: '4px'}}>
+            <i className="fas fa-home me-1" style={{color: '#ffcc00'}}></i>Inicio
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/destinos" style={{position: 'relative', padding: '0.5rem 1rem', margin: '0 0.2rem', borderRadius: '4px'}}>
+            <i className="fas fa-map-marked-alt me-1" style={{color: '#4cd964'}}></i>Destinos
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/paquetes" style={{position: 'relative', padding: '0.5rem 1rem', margin: '0 0.2rem', borderRadius: '4px'}}>
+            <i className="fas fa-suitcase me-1" style={{color: '#ff9500'}}></i>Paquetes
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/testimonios" style={{position: 'relative', padding: '0.5rem 1rem', margin: '0 0.2rem', borderRadius: '4px'}}>
+            <i className="fas fa-comments me-1" style={{color: '#ff3b30'}}></i>Testimonios
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/contacto" style={{position: 'relative', padding: '0.5rem 1rem', margin: '0 0.2rem', borderRadius: '4px'}}>
+            <i className="fas fa-envelope me-1" style={{color: '#5ac8fa'}}></i>Contacto
+          </Link>
+        </li>
+        
+        {/* Selector de idioma */}
+        <li className="nav-item dropdown me-2">
+          <button className="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '6px',
+            padding: '0.4rem 0.8rem',
+            transition: 'all 0.3s ease'
+          }}>
+            <i className="fas fa-language me-1" style={{color: '#ffcc00'}}></i>
+            {language === 'es' ? 'Español' : language === 'en' ? 'English' : language === 'zh' ? '中文' : 'Русский'}
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Link className="nav-link active" to="/">
-                  <i className="fas fa-home me-1"></i>Inicio
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/destinos">
-                  <i className="fas fa-map-marked-alt me-1"></i>Destinos
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/paquetes">
-                  <i className="fas fa-suitcase me-1"></i>Paquetes
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/testimonios">
-                  <i className="fas fa-comments me-1"></i>Testimonios
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/contacto">
-                  <i className="fas fa-envelope me-1"></i>Contacto
-                </Link>
-              </li>
-              
-              {/* Selector de idioma */}
-              <li className="nav-item dropdown me-2">
-                <button className="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
-                  <i className="fas fa-language me-1"></i>
-                  {language === 'es' ? 'Español' : language === 'en' ? 'English' : language === 'zh' ? '中文' : 'Русский'}
-                </button>
-                <ul className="dropdown-menu">
-                  <li><button className="dropdown-item" onClick={() => setLanguage('es')}>Español</button></li>
-                  <li><button className="dropdown-item" onClick={() => setLanguage('en')}>English</button></li>
-                  <li><button className="dropdown-item" onClick={() => setLanguage('zh')}>中文</button></li>
-                  <li><button className="dropdown-item" onClick={() => setLanguage('ru')}>Русский</button></li>
-                </ul>
-              </li>
-              
-              <li className="nav-item">
-                <Link className="btn btn-nicaragua ms-2" to="/registro">
-                  <i className="fas fa-user-plus me-1"></i>Registrarse
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-     
+          <ul className="dropdown-menu" style={{
+            background: 'black',
+            backdropFilter: 'blur(10px)',
+            border: 'none',
+            borderRadius: '8px',
+            overflow: 'hidden',
+            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)'
+          }}>
+            <li><button className="dropdown-item" onClick={() => setLanguage('es')} style={{transition: 'all 0.2s'}}>Español</button></li>
+            <li><button className="dropdown-item" onClick={() => setLanguage('en')} style={{transition: 'all 0.2s'}}>English</button></li>
+            <li><button className="dropdown-item" onClick={() => setLanguage('zh')} style={{transition: 'all 0.2s'}}>中文</button></li>
+            <li><button className="dropdown-item" onClick={() => setLanguage('ru')} style={{transition: 'all 0.2s'}}>Русский</button></li>
+          </ul>
+        </li>
+        
+        <li className="nav-item">
+          <Link className="btn ms-2" to="/registro" style={{
+            background: 'linear-gradient(45deg, #ff9500, #ffcc00)',
+            border: 'none',
+            borderRadius: '6px',
+            color: 'black',
+            fontWeight: '600',
+            padding: '0.5rem 1rem',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            transition: 'all 0.3s ease'
+          }}>
+            <i className="fas fa-user-plus me-1"></i>Registrarse
+          </Link>
+          {/* Botón Login */}
+  <Link
+  className="btn ms-2"
+  to="/login"
+  style={{
+    background: 'linear-gradient(45deg, #32cd32, #7fff00)', // verde lima a verde claro
+    border: 'none',
+    borderRadius: '6px',
+    color: 'black', // texto negro
+    fontWeight: '600',
+    padding: '0.5rem 1rem',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'all 0.3s ease'
+  }}
+>
+  <i className="fas fa-sign-in-alt me-1"></i>Login
+</Link>
+
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
       {/* Carrusel de imágenes de Nicaragua */}
       <div className="nicaragua-carousel">
         {nicaraguaImages.map((image, index) => (
@@ -598,13 +646,14 @@ function Home() {
             </div>
             <div className="col-lg-6">
               <div className="image-frame">
-                <img 
-                  src="https://poetasfamososdenicaragua.wordpress.com/wp-content/uploads/2020/09/image-7.jpg" 
-                  alt="Lago de Nicaragua" 
-                  className="img-fluid"
-                />
-                <div className="frame-overlay"></div>
-              </div>
+  <img 
+    src={lagoNicaragua} 
+    alt="Lago de Nicaragua" 
+    className="img-fluid"
+  />
+  <div className="frame-overlay"></div>
+</div>
+
             </div>
           </div>
         </div>
