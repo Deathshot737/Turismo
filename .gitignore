@@ -1,2 +1,20 @@
+# 🐍 Archivos y carpetas generadas por Python
 **/__pycache__/
+*.py[cod]
 *.pycgi
+
+# 🧪 Entornos virtuales
+*.venv/
+venv/
+ENV/
+env/
+
+# 🛠️ Configuración de VSCode
+.vscode/
+
+# 📦 Archivos de dependencias y compilación
+*.egg-info/
+dist/
+build/
+*.log
+
