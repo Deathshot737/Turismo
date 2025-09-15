@@ -104,7 +104,10 @@ async def auth_user(db, email, password):
 
 # Obtener todos los usuarios
 async def get_all_users(db):
-    return db.query(UserModel.usermodel).all()
+    r=db.query(UserModel.usermodel).all()
+    if not r:
+        raise HTTPException(status_code=404, detail="No se encontraron usuarios")
+    return r
 
 # Obtener usuario por email
 async def get_user_by_email(db, email):
