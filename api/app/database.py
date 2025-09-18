@@ -2,6 +2,7 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
+from passlib.hash import bcrypt
 
 # Importa la configuración de la aplicación
 from config import settings
@@ -39,6 +40,7 @@ def test_connection():
         print(f"Error de conexión: {e}")
         return False
 
+
 # Importa todos los modelos que heredan de Base
 def init_db():
     try:
@@ -51,20 +53,22 @@ def init_db():
                 print("✅ Todas las tablas ya existen.")
             else:
                 Base.metadata.create_all(bind=engine)
-                try:
-                    load()
-                except SQLAlchemyError as e:
-                    print(e)
-                print("✅ Tablas creadas exitosamente:", tablas_modelos - tablas_existentes)
+                print("✅ Tablas creadas exitosamente:", tablas_modelos - tablas_existentes,)
+            try:
+                load()
+            except SQLAlchemyError as e:
+                print(e)
     except SQLAlchemyError as e:
         print("❌ Error al inicializar la base de datos:", e)
+
 
 def cargar_roles_iniciales():
     db = SessionLocal()
     roles = [
         {"rol": "admin", "descripcion": "Administrador del sistema"},
-        {"rol": "editor", "descripcion": "Usuario con permisos de edición"},
-        {"rol": "turista", "descripcion": "Usuario visitante"}   ]
+        {"rol": "proveedor", "descripcion": "Usuario proveedor de servicios"},
+        {"rol": "turista", "descripcion": "Usuario visitante"},
+    ]
 
     for r in roles:
         existe = db.query(models.rolemodel).filter_by(rol=r["rol"]).first()
@@ -75,12 +79,13 @@ def cargar_roles_iniciales():
     db.commit()
     db.close()
 
+
 def cargar_tipos_servicio_iniciales():
     db = SessionLocal()
     tipos = [
         {"tipo": "hospedaje", "descripcion": "Alojamiento temporal"},
         {"tipo": "restaurante", "descripcion": "Servicio de comida"},
-        {"tipo": "alquiler", "descripcion": "Alquiler de vehículos o equipos"}
+        {"tipo": "alquiler", "descripcion": "Alquiler de vehículos o equipos"},
     ]
     for t in tipos:
         existe = db.query(models.typeservicemodel).filter_by(tipo=t["tipo"]).first()
@@ -89,26 +94,28 @@ def cargar_tipos_servicio_iniciales():
     db.commit()
     db.close()
 
+
 def cargar_tipos_sitio_iniciales():
     db = SessionLocal()
     tipos = [
         {"tipo": "museo", "descripcion": "Espacio cultural"},
         {"tipo": "parque", "descripcion": "Área natural o recreativa"},
-        {"tipo": "histórico", "descripcion": "Sitio de valor patrimonial"}
+        {"tipo": "histórico", "descripcion": "Sitio de valor patrimonial"},
     ]
     for t in tipos:
         existe = db.query(models.typesitemodel).filter_by(tipo=t["tipo"]).first()
         if not existe:
-            db.add(models.typeservicemodel(**t))
+            db.add(models.typesitemodel(**t))
     db.commit()
     db.close()
+
 
 def cargar_tipos_transporte_iniciales():
     db = SessionLocal()
     tipos = [
         {"tipo": "bus", "descripcion": "Transporte colectivo"},
         {"tipo": "taxi", "descripcion": "Transporte privado"},
-        {"tipo": "alquiler", "descripcion": "Vehículo alquilado"}
+        {"tipo": "alquiler", "descripcion": "Vehículo alquilado"},
     ]
     for t in tipos:
         existe = db.query(models.typetransmodel).filter_by(tipo=t["tipo"]).first()
@@ -117,33 +124,58 @@ def cargar_tipos_transporte_iniciales():
     db.commit()
     db.close()
 
+
 def cargar_estados_reserva_iniciales():
     db = SessionLocal()
     estados = [
         {"estado": "confirmado", "descripcion": "Reserva activa"},
         {"estado": "cancelado", "descripcion": "Reserva anulada"},
-        {"estado": "pendiente", "descripcion": "Reserva en espera"}
+        {"estado": "pendiente", "descripcion": "Reserva en espera"},
     ]
     for e in estados:
-        existe = db.query(models.statereservemodel).filter_by(estado=e["estado"]).first()
+        existe = (
+            db.query(models.statereservemodel).filter_by(estado=e["estado"]).first()
+        )
         if not existe:
             db.add(models.statereservemodel(**e))
     db.commit()
     db.close()
+
 
 def cargar_metodos_pago_iniciales():
     db = SessionLocal()
     metodos = [
         {"metodo": "tarjeta", "descripcion": ""},
         {"metodo": "paypal", "descripcion": ""},
-        {"metodo": "efectivo", "descripcion": ""}
+        {"metodo": "efectivo", "descripcion": ""},
     ]
     for m in metodos:
-        existe = db.query(models.methodspaymentmodel).filter_by(metodo=m["metodo"]).first()
+        existe = (
+            db.query(models.methodspaymentmodel).filter_by(metodo=m["metodo"]).first()
+        )
         if not existe:
             db.add(models.methodspaymentmodel(**m))
     db.commit()
     db.close()
+
+
+def cargar_user_admin():
+    db = SessionLocal()
+    pasword = bcrypt.hash("Root123$")
+    admin = {
+        "nombre": "root",
+        "apellido": "root",
+        "email": "root@admin.com",
+        "telefono": "87936692",
+        "password_hash": pasword,
+        "rol_id": 1,
+    }
+    existe = db.query(models.usermodel).filter_by(email=admin["email"]).first()
+    if not existe:
+        db.add(models.usermodel(**admin))
+        db.commit()
+        db.close()
+
 
 def load():
     cargar_roles_iniciales()
@@ -152,3 +184,4 @@ def load():
     cargar_tipos_transporte_iniciales()
     cargar_estados_reserva_iniciales()
     cargar_metodos_pago_iniciales()
+    cargar_user_admin()

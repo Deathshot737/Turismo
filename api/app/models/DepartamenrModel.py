@@ -3,7 +3,6 @@ from app.BaseModel import Base
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
-from sqlalchemy import ForeignKey
 # Definición del modelo Departamento
 class departamentmodel(Base):
     __tablename__="departamentos"

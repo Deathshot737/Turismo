@@ -25,13 +25,18 @@ class UserOut(BaseUser):
     rol_id: int
 
     # Configuración para trabajar con ORM
-    class Config:
-        orm_mode = True
+    model_config = {
+    "from_attributes": True
+    }
+
 
 # Esquema para actualización de usuario, todos los campos son opcionales
-class UserUpdate(BaseUser):
+class UserComplete(BaseUser):
     password: str | None = None
     es_activo: bool | None = None
     rol_id: int | None = None
-    class Config:
-        orm_mode = True
+    
+    model_config = {
+    "from_attributes": True
+    }
+

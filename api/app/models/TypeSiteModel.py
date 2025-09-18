@@ -3,7 +3,6 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy import DateTime
-from sqlalchemy import ForeignKey
 
 # Importa la libreria de la base de datos
 from app.BaseModel import Base

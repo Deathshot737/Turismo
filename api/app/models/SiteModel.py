@@ -10,6 +10,7 @@ class sitemodel(Base):
     nombre = Column(String(100), nullable=False)
     tipo_id = Column(Integer, ForeignKey("tipos_sitio.id"), nullable=False)
     departamento_id = Column(Integer, ForeignKey("departamentos.id"), nullable=False)
+    imagen=Column(String(255), nullable=False)
     descripcion = Column(String(255), nullable=True)
     precio= Column(DECIMAL(10,2), nullable=False)
     capacidad = Column(Integer, nullable=False)

@@ -12,6 +12,7 @@ class servicemodel(Base):
     tipo_id = Column(Integer, ForeignKey("tipos_servicio.id"), nullable=False)
     nombre = Column(String(100), nullable=False)
     descripcion = Column(String(255), nullable=True)
+    imagen=Column(String(255), nullable=False)
     ubicacion = Column(String(255), nullable=False)
     precio= Column(DECIMAL(10,2), nullable=False)
     capacidad = Column(Integer, nullable=False)
