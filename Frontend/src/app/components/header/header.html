@@ -1,0 +1,55 @@
+<header>
+    <mat-toolbar color="primary" class="navbar">
+        <div class="navbar-right">
+            
+            <a routerLink="/" class="logo">
+                <img src="/img/logo.png" alt="Logo" class="logo-img">
+            </a>
+                        <button mat-raised-button color="primary" routerLink="/" class="nav-btn">Inicio</button>
+                        <button mat-raised-button color="primary" routerLink="/Nosotros" class="nav-btn">Nosotros</button>
+                        <button mat-raised-button color="primary" routerLink="/Contacto" class="nav-btn">Contacto</button>
+                        @if (currentRole === 'turista') {
+                            
+                        <button mat-raised-button color="primary" routerLink="/reservaciones" class="nav-btn">Reservaciones</button>
+                        <button mat-raised-button color="primary" routerLink="/pagos" class="nav-btn">Pagos</button>
+                        }
+                        @if (currentRole === 'admin') {
+                          <button mat-raised-button color="warn" routerLink="/dashboard-admin" class="nav-btn">Panel Admin</button>
+                        }
+            
+            
+        </div>
+        <span class="spacer"></span>
+        <nav class="nav-links" [class.open]="menuOpen">
+            @if (!(currentUser$ | async)) {
+                <button mat-stroked-button color="accent" routerLink="/login" class="nav-btn">Iniciar Sesión</button>
+                <button mat-stroked-button color="accent" routerLink="/register" class="nav-btn">Registrarse</button>
+            }
+                        @if (currentUser$ | async) {
+                            <div class="user-inline" style="display:flex; align-items:center; gap:10px;">
+                                <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="Menú usuario" class="fa-profile-btn">
+                                    <i class="fa-solid fa-user" style="font-size:22px;"></i>
+                                </button>
+                                @if (currentRole) {
+                <span class="user-role">{{ userName || 'Usuario' }}</span>
+            }
+                                <mat-menu #userMenu="matMenu">
+                                    @if (currentRole === 'turista') {
+                                        <button mat-menu-item routerLink="/mis-reservas">
+                                            <i class="fa-solid fa-list-check" style="margin-right:8px; width:18px; text-align:center;"></i>
+                                            <span>Mis Reservas</span>
+                                        </button>
+                                    }
+                                    <button mat-menu-item (click)="logout()">
+                                        <i class="fa-solid fa-right-from-bracket" style="margin-right:8px; width:18px; text-align:center;"></i>
+                                        <span>Cerrar sesión</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        }
+        </nav>
+        <button mat-icon-button class="menu-btn" (click)="toggleMenu()">
+            <mat-icon>{{ menuOpen ? 'close' : 'menu' }}</mat-icon>
+        </button>
+    </mat-toolbar>
+</header>

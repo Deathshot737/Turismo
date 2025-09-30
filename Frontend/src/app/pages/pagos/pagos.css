@@ -1,0 +1,38 @@
+.pagos-wrapper { max-width: 760px; margin:5.5rem auto 2rem; background:#fff; padding:2rem 2rem 2.5rem; border-radius:24px; box-shadow:0 6px 32px rgba(23,74,124,0.12); position:relative; z-index:1; }
+.pagos-wrapper h1 { margin:0 0 1.2rem; color:#174A7C; font-size:2rem; text-align:center; }
+.pasos-indicador { display:grid; grid-template-columns:repeat(4,1fr); gap:0.6rem; margin-bottom:1.5rem; }
+.pasos-indicador .paso { background:#eef5fa; padding:0.6rem 0.4rem; text-align:center; font-size:0.78rem; font-weight:600; border-radius:10px; letter-spacing:.5px; color:#174A7C; }
+.pasos-indicador .paso.activo { background:linear-gradient(90deg,#00A6B1,#F06C4F); color:#fff; box-shadow:0 2px 10px rgba(0,166,177,0.25); }
+.card-form { display:flex; flex-direction:column; gap:0.6rem; background:#f9fcfe; padding:1.4rem 1.2rem 1.6rem; border-radius:18px; border:1px solid #d8e6ef; }
+.card-form label { font-size:0.85rem; font-weight:600; color:#174A7C; letter-spacing:.5px; }
+.card-form input { padding:0.7rem 0.9rem; border-radius:10px; border:1px solid #c3d6e2; background:#fff; font-size:0.95rem; transition:border-color .2s, box-shadow .2s; }
+.card-form input:focus { outline:none; border-color:#00A6B1; box-shadow:0 0 0 3px rgba(0,166,177,0.25); }
+.metodos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:1rem; margin-bottom:1.5rem; }
+.metodo-card { background:#fff; border:1px solid #dce7ef; border-radius:16px; padding:1.1rem .9rem 1.2rem; text-align:center; cursor:pointer; position:relative; transition:box-shadow .2s,border-color .2s, transform .2s; }
+.metodo-card:hover { box-shadow:0 4px 18px rgba(0,166,177,0.15); transform:translateY(-4px); }
+.metodo-card.seleccionado { border-color:#00A6B1; box-shadow:0 4px 20px rgba(0,166,177,0.25); }
+.metodo-card i { font-size:2rem; color:#00A6B1; margin-bottom:.3rem; }
+.metodo-card h3 { margin:.2rem 0 .4rem; font-size:1rem; color:#174A7C; }
+.metodo-card p { font-size:.75rem; color:#2b3e50; line-height:1.1rem; }
+.tarjeta-form .fila-2 { display:grid; grid-template-columns:1fr 120px; gap:0.8rem; }
+.resumen { background:#f9fcfe; border:1px solid #d8e6ef; padding:1.4rem 1.2rem 1.6rem; border-radius:18px; }
+.resumen h2 { margin:0 0 .9rem; font-size:1.3rem; color:#174A7C; }
+.resumen ul { list-style:none; margin:0 0 1rem; padding:0; display:flex; flex-direction:column; gap:.4rem; }
+.resumen li { font-size:.9rem; color:#174A7C; }
+.chk-terminos { font-size:.8rem; display:flex; gap:.4rem; align-items:center; color:#174A7C; }
+.alerta-error, .alerta-exito { padding:.8rem 1rem; border-radius:12px; margin-bottom:1rem; font-size:.85rem; font-weight:600; }
+.alerta-error { background:#ffe8e4; color:#c0392b; border:1px solid #ffb5ab; }
+.alerta-exito { background:#e6f9ef; color:#1e7e34; border:1px solid #b2ebc7; }
+.acciones-pago { margin-top:1.4rem; display:flex; gap:0.8rem; justify-content:flex-end; }
+.btn-primario, .btn-secundario { border:none; padding:.75rem 1.4rem; font-weight:600; font-size:.9rem; border-radius:10px; cursor:pointer; letter-spacing:.5px; display:inline-flex; align-items:center; gap:.4rem; }
+.btn-primario { background:linear-gradient(90deg,#00A6B1,#F06C4F); color:#fff; box-shadow:0 3px 12px rgba(0,166,177,.25); }
+.btn-primario:hover { filter:brightness(1.05); }
+.btn-secundario { background:#ebf3f7; color:#174A7C; }
+.btn-secundario:hover { background:#d9ebf2; }
+@media (max-width:650px){
+  .pagos-wrapper{padding:1.5rem 1.2rem 2rem;}
+  .pasos-indicador .paso{font-size:.65rem; padding:.5rem .2rem;}
+  .acciones-pago{flex-direction:column;}
+  .acciones-pago button{width:100%;}
+  .tarjeta-form .fila-2{grid-template-columns:1fr 100px;}
+}

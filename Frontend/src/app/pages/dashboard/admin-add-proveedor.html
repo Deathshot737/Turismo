@@ -1,0 +1,17 @@
+<div class="admin-add-proveedor">
+  <h3>Agregar Proveedor</h3>
+  <form [formGroup]="proveedorForm" (ngSubmit)="onSubmit()">
+    <label>Nombre</label>
+    <input formControlName="nombre" type="text" />
+    <label>Apellido</label>
+    <input formControlName="apellido" type="text" />
+    <label>Email</label>
+    <input formControlName="email" type="email" />
+    <label>Teléfono</label>
+    <input formControlName="telefono" type="text" />
+    <label>Contraseña</label>
+    <input formControlName="password" type="password" />
+    <button type="submit">Crear proveedor</button>
+  </form>
+  <div class="message">{{ message }}</div>
+</div>

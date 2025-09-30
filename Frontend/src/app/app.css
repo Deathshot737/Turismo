@@ -1,0 +1,21 @@
+
+/* Tipografía ExploraNic */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+/* Si tienes el archivo de Etna Sans Serif, agrégalo aquí. Usamos Montserrat como alternativa visualmente similar. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+body {
+	font-family: 'Roboto Mono', monospace;
+	color: #174A7C;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Montserrat', 'Etna Sans Serif', Arial, sans-serif;
+	font-weight: 700;
+	color: #174A7C;
+}
+
+.user-role, .about-section h3, .valores-marca h1 {
+	font-family: 'Montserrat', 'Etna Sans Serif', Arial, sans-serif;
+}
+

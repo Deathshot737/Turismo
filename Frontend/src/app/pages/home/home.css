@@ -1,0 +1,228 @@
+.custom-carousel {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.carousel-slide {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-slide img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.3s;
+}
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.7) 60%, var(--color-primary) 100%);
+  color: #fff;
+  padding: 1.5rem 2.5rem;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 80%;
+  animation: fadeInUp 1s;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate(-50%, 20%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+.carousel-caption h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+.carousel-caption h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.carousel-btn {
+  margin-top: 1rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.carousel-btn:hover {
+  background: #1565c0;
+}
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s;
+}
+.carousel-arrow.left {
+  left: 16px;
+}
+.carousel-arrow.right {
+  right: 16px;
+}
+.carousel-arrow:hover {
+  background: #1976d2;
+}
+.carousel-indicators {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+.carousel-indicators span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s;
+}
+.carousel-indicators span.active {
+  opacity: 1;
+  background: #1976d2;
+}
+@media (max-width: 768px) {
+  .custom-carousel {
+    width: 100vw;
+    height: 60vh;
+    max-width: 100vw;
+    max-height: 60vh;
+  }
+  .carousel-slide img {
+    width: 100vw;
+    height: 60vh;
+  }
+  .carousel-caption {
+    padding: 1rem;
+    font-size: 1rem;
+    max-width: 95%;
+  }
+}
+/* Contenedor extra para el carrusel con overflow oculto */
+.carousel-container {
+  width: 100vw;
+  max-width: 100vw;
+  overflow: hidden;
+  margin: 0 auto;
+}
+/* Limita el ancho máximo y centra el carrusel para evitar que se muestren varias imágenes al hacer Zoom - */
+.owl-carousel, .owl-stage-outer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+/* Oculta el overflow para que solo se vea una imagen por slide */
+.owl-carousel,
+.owl-stage-outer {
+  overflow: hidden !important;
+
+}
+.carousel-slide {
+  position: relative;
+}
+.carousel-slide img {
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  transition: transform 0.3s;
+}
+.carousel-slide img:hover {
+  transform: scale(1.03);
+}
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.7) 60%, rgba(25,118,210,0.7) 100%);
+  color: #fff;
+  padding: 1.5rem 2.5rem;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 80%;
+  animation: fadeInUp 1s;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate(-50%, 20%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+.carousel-caption h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+.carousel-caption p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.carousel-btn {
+  margin-top: 1rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.carousel-btn:hover {
+  background: #1565c0;
+}
+
+@media (max-width: 768px) {
+  .carousel-caption {
+    padding: 1rem;
+    font-size: 1rem;
+    max-width: 95%;
+  }
+  .carousel-slide img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+@media (max-width: 480px) {
+  .custom-carousel {
+    height: 40vh;
+    min-height: 320px;
+  }
+  .carousel-slide img {
+    height: 40vh;
+    min-height: 320px;
+  }
+  .carousel-caption {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+    max-width: 98vw;
+  }
+}

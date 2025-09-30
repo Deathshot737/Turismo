@@ -1,0 +1,372 @@
+<nav class="reservas-navbar">
+      <ul>
+        @for (cat of categorias; track cat.value) {
+          <li [class.active]="tipo() === cat.value" (click)="setTipo(cat.value)">
+            <i class="fa {{cat.icon}}"></i>
+            <span>{{cat.label}}</span>
+          </li>
+        }
+      </ul>
+    </nav>
+
+<section class="reserva-form-modern">
+  <form class="reserva-form-row" (submit)="$event.preventDefault()">
+    @if (mensajeReserva()) { <div class="alerta-reserva">{{mensajeReserva()}}</div> }
+  @if (tipo() === 'entrada') {
+      <section class="sitios-turisticos">
+        <div class="sitios-filtro">
+          <label for="sitio-ciudad-select" class="sitio-filtro-label"><i class="fa fa-map-marker-alt"></i> Filtrar por ciudad:</label>
+          <select id="sitio-ciudad-select" (change)="onCiudadChange($event)" class="sitio-filtro-select">
+            <option value="">Todas</option>
+            <option value="Ometepe">Ometepe</option>
+            <option value="Granada">Granada</option>
+            <option value="León">León</option>
+            <option value="San Juan del Sur">San Juan del Sur</option>
+            <option value="Masaya">Masaya</option>
+            <option value="Managua">Managua</option>
+            <option value="Somoto">Somoto</option>
+          </select>
+          <button type="button" class="btn-filtro-reset" (click)="resetSitiosFiltros()"><i class="fa fa-eraser"></i> Limpiar</button>
+        </div>
+        <div class="sitios-lista">
+          @if (sitiosTuristicosFiltrados().length === 0) {
+            <div class="no-sitios">No hay sitios turísticos disponibles en esta ciudad.</div>
+          }
+          @for (sitio of sitiosTuristicosFiltrados(); track sitio.nombre) {
+            <div class="sitio-card" (click)="abrirModalSitio(sitio)">
+              <span class="card-recomendacion">{{sitio.recomendacion}}</span>
+              <span class="card-valoracion"><i class="fa fa-star"></i> {{sitio.valoracion}}</span>
+              <img [src]="sitio.imagen" alt="{{sitio.nombre}}" class="sitio-img" />
+              <div class="sitio-info">
+                <h3>{{sitio.nombre}}</h3>
+                <p>{{sitio.descripcion}}</p>
+                <div class="sitio-ciudad-badge"><i class="fa fa-map-marker-alt"></i><span>{{sitio.ciudad}}</span></div>
+                <div class="card-acciones-inline">
+                  <button type="button" class="btn-reservar-hotel" (click)="$event.stopPropagation(); elementoSeleccionado.set(sitio); modalTipo.set('sitio'); onReservarModal();"><i class="fa fa-bookmark"></i> Reservar</button>
+                  <button type="button" class="btn-pagar-inline" (click)="$event.stopPropagation(); elementoSeleccionado.set(sitio); modalTipo.set('sitio'); irAPagoDesdeModal();"><i class="fa fa-credit-card"></i> Pagar</button>
+                  <button type="button" class="btn-ver-detalles-sm" (click)="$event.stopPropagation(); abrirModalSitio(sitio)"><i class="fa fa-info-circle"></i></button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+    @if (tipo() === 'hospedaje') {
+      <section class="hospedaje-hoteles">
+        <div class="hospedaje-filtro">
+          <label for="hotel-ciudad-select" class="hotel-filtro-label"><i class="fa fa-map-marker-alt"></i> Filtrar por ciudad:</label>
+          <select id="hotel-ciudad-select" (change)="onHotelCiudadChange($event)" class="hotel-filtro-select">
+            <option value="">Todas</option>
+            <option value="Managua">Managua</option>
+            <option value="Granada">Granada</option>
+            <option value="León">León</option>
+            <option value="San Juan del Sur">San Juan del Sur</option>
+            <option value="Ometepe">Ometepe</option>
+            <option value="Altagracia">Altagracia</option>
+          </select>
+          <button type="button" class="btn-filtro-reset" (click)="resetHotelesFiltros()"><i class="fa fa-eraser"></i> Limpiar</button>
+        </div>
+        <div class="hospedaje-lista">
+  @if (hotelesFiltrados().length === 0) {
+    <div class="no-hoteles">No hay hoteles disponibles en esta ciudad.</div>
+  }
+  @for (hotel of hotelesFiltrados(); track hotel.nombre) {
+    <div class="hotel-card" (click)="abrirModalHotel(hotel)">
+      <span class="card-recomendacion">{{hotel.recomendacion}}</span>
+      <span class="card-valoracion"><i class="fa fa-star"></i> {{hotel.valoracion}}</span>
+      <div class="hotel-img-wrap">
+        <img [src]="hotel.imagen" alt="{{hotel.nombre}}" class="hotel-img" />
+        <span class="hotel-ciudad-badge">{{hotel.ciudad}}</span>
+      </div>
+      <div class="hotel-info">
+        <h3>{{hotel.nombre}}</h3>
+        <p>{{hotel.descripcion}}</p>
+        <div class="card-acciones-inline">
+          <button type="button" class="btn-reservar-hotel" (click)="$event.stopPropagation(); elementoSeleccionado.set(hotel); modalTipo.set('hotel'); onReservarModal();"><i class="fa fa-bookmark"></i> Reservar</button>
+          <button type="button" class="btn-pagar-inline" (click)="$event.stopPropagation(); elementoSeleccionado.set(hotel); modalTipo.set('hotel'); irAPagoDesdeModal();"><i class="fa fa-credit-card"></i> Pagar</button>
+          <button type="button" class="btn-ver-detalles-sm" (click)="$event.stopPropagation(); abrirModalHotel(hotel)"><i class="fa fa-info-circle"></i></button>
+        </div>
+      </div>
+    </div>
+  }
+ </div>
+          
+      </section>
+    }
+  @if (tipo() === 'restaurante') {
+  <section class="restaurantes-filtro">
+    <label for="restaurante-ciudad-select" class="hotel-filtro-label"><i class="fa fa-map-marker-alt"></i> Filtrar por ciudad:</label>
+    <select id="restaurante-ciudad-select" (change)="onRestauranteCiudadChange($event)" class="hotel-filtro-select">
+      <option value="">Todas</option>
+      <option value="Managua">Managua</option>
+      <option value="Granada">Granada</option>
+      <option value="León">León</option>
+      <option value="San Juan del Sur">San Juan del Sur</option>
+      <option value="Masaya">Masaya</option>
+    </select>
+    <button type="button" class="btn-filtro-reset" (click)="resetRestaurantesFiltros()"><i class="fa fa-eraser"></i> Limpiar</button>
+  </section>
+  <div class="hospedaje-lista">
+    @if (restaurantesFiltrados().length === 0) {
+      <div class="no-hoteles">No hay restaurantes disponibles en esta ciudad.</div>
+    }
+    @for (restaurante of restaurantesFiltrados(); track restaurante.nombre) {
+      <div class="hotel-card" (click)="abrirModalRestaurante(restaurante)">
+        <span class="card-recomendacion">{{restaurante.recomendacion}}</span>
+        <span class="card-valoracion"><i class="fa fa-star"></i> {{restaurante.valoracion}}</span>
+        <div class="hotel-img-wrap">
+          <img [src]="restaurante.imagen" alt="{{restaurante.nombre}}" class="hotel-img" />
+          <span class="hotel-ciudad-badge">{{restaurante.ciudad}}</span>
+        </div>
+        <div class="hotel-info">
+          <h3>{{restaurante.nombre}}</h3>
+          <p>{{restaurante.descripcion}}</p>
+          <div class="card-acciones-inline">
+            <button type="button" class="btn-reservar-hotel" (click)="$event.stopPropagation(); elementoSeleccionado.set(restaurante); modalTipo.set('restaurante'); onReservarModal();"><i class="fa fa-bookmark"></i> Reservar</button>
+            <button type="button" class="btn-pagar-inline" (click)="$event.stopPropagation(); elementoSeleccionado.set(restaurante); modalTipo.set('restaurante'); irAPagoDesdeModal();"><i class="fa fa-credit-card"></i> Pagar</button>
+            <button type="button" class="btn-ver-detalles-sm" (click)="$event.stopPropagation(); abrirModalRestaurante(restaurante)"><i class="fa fa-info-circle"></i></button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}
+@if (tipo() === 'transporte') {
+  <section class="transporte-bloque">
+        <form class="transporte-form">
+          <div class="form-row-horizontal">
+            <div class="form-field">
+              <label for="origen"><i class="fa fa-bus"></i> Origen</label>
+              <input type="text" id="origen" placeholder="Escribe origen" [value]="transporteOrigen()" (input)="setTransporteOrigen($event.target.value)">
+            </div>
+            <div class="form-field">
+              <label for="destino"><i class="fa fa-bus"></i> Destino</label>
+              <input type="text" id="destino" placeholder="Escribe destino" [value]="transporteDestino()" (input)="setTransporteDestino($event.target.value)">
+            </div>
+            <div class="form-field">
+              <label for="fecha"><i class="fa fa-calendar-alt"></i> Fecha</label>
+              <input type="date" id="fecha" (change)="onInputChange($event, setTransporteFecha)">
+            </div>
+            <div class="form-field">
+              <label for="pasajeros"><i class="fa fa-user-friends"></i> Pasajeros</label>
+              <input type="number" id="pasajeros" min="1" max="10" (input)="onInputChange($event, setTransportePasajeros, 'number')">
+            </div>
+            <div class="form-field form-btn-field">
+              <button type="button" class="btn-buscar-transporte" (click)="buscarRutasTransporte()">Buscar rutas</button>
+              <button type="button" class="btn-filtro-reset" (click)="resetTransporteFiltros()"><i class="fa fa-eraser"></i></button>
+            </div>
+          </div>
+        </form>
+        <div class="transporte-rutas">
+          <h4>Rutas sugeridas</h4>
+          <div class="transporte-rutas-lista">
+            @if (mensajeTransporte()) {
+              <div class="no-rutas">{{mensajeTransporte()}}</div>
+            }
+            @if (!mensajeTransporte()) {
+              @if (rutasTransporteFiltradas().length === 0) {
+                <div class="no-rutas">No hay rutas disponibles para la selección.</div>
+              }
+              @for (ruta of rutasTransporteFiltradas(); track ruta.origen + '-' + ruta.destino) {
+                <div class="transporte-card" (click)="abrirModalTransporte(ruta)">
+                  <div class="transporte-card-header">
+                    <span class="transporte-origen"><i class="fa fa-map-marker-alt"></i> {{ruta.origen}}</span>
+                    <span class="transporte-destino"><i class="fa fa-arrow-right"></i> {{ruta.destino}}</span>
+                  </div>
+                  <div class="transporte-card-body">
+                    <span class="transporte-tipo"><i class="fa fa-bus"></i> {{ruta.tipo}}</span>
+                    <span class="transporte-hora"><i class="fa fa-clock"></i> {{ruta.hora}}</span>
+                    <span class="transporte-precio"><i class="fa fa-dollar-sign"></i> ${{ruta.precio}}</span>
+                  </div>
+                          <div class="transporte-acciones-inline">
+                            <button type="button" class="btn-reservar-hotel" (click)="$event.stopPropagation(); rutaSeleccionada.set(ruta); modalTipo.set('transporte'); modalTransporteAbierto.set(true); onReservarModal();"><i class="fa fa-bookmark"></i></button>
+                            <button type="button" class="btn-pagar-inline" (click)="$event.stopPropagation(); rutaSeleccionada.set(ruta); modalTipo.set('transporte'); modalTransporteAbierto.set(true); irAPagoDesdeModal();"><i class="fa fa-credit-card"></i></button>
+                            <button type="button" class="btn-ver-detalles" (click)="$event.stopPropagation(); abrirModalTransporte(ruta)"><i class="fa fa-info-circle"></i></button>
+                          </div>
+                </div>
+              }
+            }
+          </div>
+        </div>
+      </section>
+    }
+      
+    
+
+@if (tipo() === 'vehiculo') {
+  <section class="vehiculo-bloque">
+    <div class="vehiculo-filtros-grid">
+      <div class="form-field">
+        <label for="vehiculo-ciudad-select"><i class="fa fa-map-marker-alt"></i> Ciudad</label>
+        <select id="vehiculo-ciudad-select" (change)="onVehiculoCiudadChange($event)">
+          <option value="">Todas</option>
+          <option value="Managua">Managua</option>
+          <option value="Granada">Granada</option>
+          <option value="León">León</option>
+          <option value="San Juan del Sur">San Juan del Sur</option>
+          <option value="Masaya">Masaya</option>
+          <option value="Ometepe">Ometepe</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="vehiculo-categoria-select"><i class="fa fa-tags"></i> Categoría</label>
+        <select id="vehiculo-categoria-select" (change)="onVehiculoCategoriaChange($event)">
+          <option value="">Todas</option>
+          <option value="SUV">SUV</option>
+            <option value="4x4">4x4</option>
+          <option value="Sedán">Sedán</option>
+          <option value="Compacto">Compacto</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="vehiculo-pasajeros"><i class="fa fa-user-friends"></i> Pasajeros</label>
+        <input id="vehiculo-pasajeros" type="number" min="1" max="9" [value]="vehiculoPasajeros()" (input)="onVehiculoPasajerosInput($event)">
+      </div>
+      <div class="form-field">
+        <label for="vehiculo-fecha-inicio"><i class="fa fa-calendar-alt"></i> Retiro</label>
+        <input id="vehiculo-fecha-inicio" type="date" (change)="onVehiculoFechaInicioChange($event)">
+      </div>
+      <div class="form-field">
+        <label for="vehiculo-fecha-fin"><i class="fa fa-calendar-alt"></i> Devolución</label>
+        <input id="vehiculo-fecha-fin" type="date" (change)="onVehiculoFechaFinChange($event)">
+      </div>
+      <div class="form-field form-btn-field">
+        <button type="button" class="btn-buscar-transporte" (click)="validarVehiculoFiltros()"><i class="fa fa-search"></i> Filtrar</button>
+        <button type="button" class="btn-filtro-reset" (click)="resetVehiculoFiltros()"><i class="fa fa-eraser"></i></button>
+      </div>
+    </div>
+    @if (vehiculoMensaje()) {
+      <div class="vehiculo-mensaje-error">{{vehiculoMensaje()}}</div>
+    }
+    <div class="hospedaje-lista">
+      @if (vehiculosFiltrados().length === 0 && !vehiculoMensaje()) {
+        <div class="no-hoteles">No hay vehículos que coincidan con los filtros.</div>
+      }
+      @for (vehiculo of vehiculosFiltrados(); track vehiculo.nombre) {
+        <div class="hotel-card vehiculo-card" (click)="abrirModalVehiculo(vehiculo)">
+          <span class="card-recomendacion">{{vehiculo.recomendacion}}</span>
+          <span class="card-valoracion"><i class="fa fa-star"></i> {{vehiculo.valoracion}}</span>
+          <div class="hotel-img-wrap">
+            <img [src]="vehiculo.imagen" alt="{{vehiculo.nombre}}" class="hotel-img" />
+            <span class="hotel-ciudad-badge">{{vehiculo.ciudad}}</span>
+          </div>
+            <div class="hotel-info">
+              <h3>{{vehiculo.nombre}}</h3>
+              <p>{{vehiculo.descripcion}}</p>
+              <div class="vehiculo-atributos">
+                <span><i class="fa fa-tags"></i> {{vehiculo.categoria}}</span>
+                <span><i class="fa fa-cogs"></i> {{vehiculo.transmision}}</span>
+                <span><i class="fa fa-user-friends"></i> {{vehiculo.pasajeros}} pax</span>
+                <span><i class="fa fa-dollar-sign"></i> ${{vehiculo.precioDia}}/día</span>
+              </div>
+              <div class="card-acciones-inline">
+                <button type="button" class="btn-reservar-hotel" (click)="$event.stopPropagation(); elementoSeleccionado.set(vehiculo); modalTipo.set('vehiculo'); onReservarModal();"><i class="fa fa-bookmark"></i> Reservar</button>
+                <button type="button" class="btn-pagar-inline" (click)="$event.stopPropagation(); elementoSeleccionado.set(vehiculo); modalTipo.set('vehiculo'); irAPagoDesdeModal();"><i class="fa fa-credit-card"></i> Pagar</button>
+                <button type="button" class="btn-ver-detalles-sm" (click)="$event.stopPropagation(); abrirModalVehiculo(vehiculo)"><i class="fa fa-info-circle"></i></button>
+              </div>
+            </div>
+          </div>
+      }
+    </div>
+  </section>
+}
++
+<!-- MODAL DETALLES -->
+@if (modalAbierto()) {
+  <div class="modal-overlay" (click)="cerrarModal()"></div>
+  <div class="modal-detalles">
+    <button class="modal-cerrar" (click)="cerrarModal()"><i class="fa fa-times"></i></button>
+    @if (modalTipo() === 'sitio' && elementoSeleccionado()) {
+      <div class="modal-contenido">
+        <img [src]="elementoSeleccionado().imagen" alt="{{elementoSeleccionado().nombre}}" class="modal-img" />
+        <h2>{{elementoSeleccionado().nombre}}</h2>
+        <p>{{elementoSeleccionado().descripcion}}</p>
+        <span class="modal-ciudad">{{elementoSeleccionado().ciudad}}</span>
+        <div class="modal-mapa">
+          <iframe loading="lazy" [src]="buildMapaSrc(elementoSeleccionado())"></iframe>
+        </div>
+        <div class="modal-acciones">
+          <button type="button" class="btn-reservar-modal" (click)="onReservarModal()"><i class="fa fa-bookmark"></i> Crear reserva</button>
+          <button type="button" class="btn-pagar-ahora" (click)="irAPagoDesdeModal()"><i class="fa fa-credit-card"></i> Pagar ahora</button>
+        </div>
+      </div>
+    }
+    @if (modalTipo() === 'hotel' && elementoSeleccionado()) {
+      <div class="modal-contenido">
+        <img [src]="elementoSeleccionado().imagen" alt="{{elementoSeleccionado().nombre}}" class="modal-img" />
+        <h2>{{elementoSeleccionado().nombre}}</h2>
+        <p>{{elementoSeleccionado().descripcion}}</p>
+        <span class="modal-ciudad">{{elementoSeleccionado().ciudad}}</span>
+        <div class="modal-mapa">
+          <iframe loading="lazy" [src]="buildMapaSrc(elementoSeleccionado())"></iframe>
+        </div>
+        <div class="modal-acciones">
+          <button type="button" class="btn-reservar-modal" (click)="onReservarModal()"><i class="fa fa-calendar-check"></i> Reservar hospedaje</button>
+          <button type="button" class="btn-pagar-ahora" (click)="irAPagoDesdeModal()"><i class="fa fa-credit-card"></i> Pagar ahora</button>
+        </div>
+      </div>
+    }
+    @if (modalTipo() === 'restaurante' && elementoSeleccionado()) {
+      <div class="modal-contenido">
+        <img [src]="elementoSeleccionado().imagen" alt="{{elementoSeleccionado().nombre}}" class="modal-img" />
+        <h2>{{elementoSeleccionado().nombre}}</h2>
+        <p>{{elementoSeleccionado().descripcion}}</p>
+        <span class="modal-ciudad">{{elementoSeleccionado().ciudad}}</span>
+        <div class="modal-mapa">
+          <iframe loading="lazy" [src]="buildMapaSrc(elementoSeleccionado())"></iframe>
+        </div>
+        <div class="modal-acciones">
+          <button type="button" class="btn-reservar-modal" (click)="onReservarModal()"><i class="fa fa-calendar-check"></i> Reservar restaurante</button>
+          <button type="button" class="btn-pagar-ahora" (click)="irAPagoDesdeModal()"><i class="fa fa-credit-card"></i> Pagar ahora</button>
+        </div>
+      </div>
+    }
+    @if (modalTipo() === 'vehiculo' && elementoSeleccionado()) {
+      <div class="modal-contenido">
+        <img [src]="elementoSeleccionado().imagen" alt="{{elementoSeleccionado().nombre}}" class="modal-img" />
+        <h2>{{elementoSeleccionado().nombre}}</h2>
+        <p>{{elementoSeleccionado().descripcion}}</p>
+        <div class="modal-extra-datos">
+          <p><strong>Categoría:</strong> {{elementoSeleccionado().categoria}}</p>
+          <p><strong>Transmisión:</strong> {{elementoSeleccionado().transmision}}</p>
+          <p><strong>Pasajeros:</strong> {{elementoSeleccionado().pasajeros}}</p>
+          <p><strong>Precio por día:</strong> ${{elementoSeleccionado().precioDia}}</p>
+          <p><strong>Días estimados:</strong> {{diasVehiculo()}}</p>
+          <p><strong>Total estimado:</strong> ${{precioVehiculoEstimado()}}</p>
+        </div>
+        <span class="modal-ciudad">{{elementoSeleccionado().ciudad}}</span>
+        <div class="modal-mapa">
+          <iframe loading="lazy" [src]="buildMapaSrc(elementoSeleccionado())"></iframe>
+        </div>
+        <div class="modal-acciones">
+          <button type="button" class="btn-reservar-modal" (click)="onReservarModal()"><i class="fa fa-calendar-check"></i> Reservar vehículo</button>
+          <button type="button" class="btn-pagar-ahora" (click)="irAPagoDesdeModal()"><i class="fa fa-credit-card"></i> Pagar ahora</button>
+        </div>
+      </div>
+    }
+  </div>
+}
+@if (modalTransporteAbierto()) {
+  <div class="modal-overlay" (click)="cerrarModalTransporte()"></div>
+  <div class="modal-detalles">
+    <button class="modal-cerrar" (click)="cerrarModalTransporte()"><i class="fa fa-times"></i></button>
+    @if (rutaSeleccionada()) {
+      <div class="modal-contenido">
+        <h2>Ruta: {{rutaSeleccionada().origen}} <i class="fa fa-arrow-right"></i> {{rutaSeleccionada().destino}}</h2>
+        <p><strong>Tipo:</strong> {{rutaSeleccionada().tipo}}</p>
+        <p><strong>Horario:</strong> {{rutaSeleccionada().hora}}</p>
+        <p><strong>Precio:</strong> ${{rutaSeleccionada().precio}}</p>
+        <p><strong>Fecha seleccionada:</strong> {{transporteFecha() || 'No seleccionada'}}</p>
+        <p><strong>Pasajeros:</strong> {{transportePasajeros()}}</p>
+        <div class="modal-mapa">
+          <iframe loading="lazy" [src]="buildMapaSrc({ ciudad: rutaSeleccionada().destino, nombre: rutaSeleccionada().destino })"></iframe>
+        </div>
+        <div class="modal-acciones">
+          <button type="button" class="btn-reservar-modal" (click)="onReservarModal()"><i class="fa fa-calendar-check"></i> Confirmar reserva</button>
+          <button type="button" class="btn-pagar-ahora" (click)="irAPagoDesdeModal()"><i class="fa fa-credit-card"></i> Pagar ahora</button>
+        </div>
+      </div>
+    }
+  </div>
+}

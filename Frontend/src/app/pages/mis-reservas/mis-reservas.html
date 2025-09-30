@@ -1,0 +1,15 @@
+<section class="mis-reservas-wrapper">
+  <h1>Mis Reservas</h1>
+  <p *ngIf="!userEmail()">Debes iniciar sesión para ver tus reservas.</p>
+  <div *ngIf="userEmail() && reservas().length === 0" class="no-reservas">No tienes reservas todavía.</div>
+  <div class="reservas-grid" *ngIf="reservas().length > 0">
+    <div class="reserva-card" *ngFor="let r of reservas()">
+      <h3>{{r.referencia}}</h3>
+      <p><strong>Tipo:</strong> {{r.tipo}}</p>
+      <p><strong>Fecha:</strong> {{r.fechaCreacion | date:'short'}}</p>
+      <p><strong>Monto:</strong> ${{r.monto}}</p>
+      <p><strong>Estado:</strong> <span class="estado {{r.estado}}">{{r.estado}}</span></p>
+      <button *ngIf="r.estado==='pagado'" (click)="cancelar(r.id)" class="btn-cancelar">Cancelar</button>
+    </div>
+  </div>
+</section>

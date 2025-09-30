@@ -1,0 +1,36 @@
+
+
+<!-- Header azul con logo y texto alineados -->
+<div class="login-header">
+  <img src="img/logoWhite.png" alt="Logo ExploraNica" class="login-logo" />
+  <span class="login-title">ExploraNica</span>
+</div>
+
+<!-- Container centrado con el formulario -->
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="login-title-form">Iniciar Sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="login-group">
+        <label for="email" class="login-label">Correo electrónico</label>
+        <input id="email" type="email" class="login-input" formControlName="email" placeholder="ejemplo@correo.com" />
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="login-error">
+          Ingresa un correo válido
+        </div>
+      </div>
+      <div class="login-group">
+        <label for="password" class="login-label">Contraseña</label>
+        <input id="password" type="password" class="login-input" formControlName="password" placeholder="********" />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="login-error">
+          La contraseña es requerida
+        </div>
+      </div>
+      <button type="submit" class="login-btn">Ingresar</button>
+      <button type="button" class="login-btn-cancel" (click)="cancelar()">Cancelar</button>
+    </form>
+    <div class="login-message">{{ message }}</div>
+    <div class="login-link">
+      ¿No tienes cuenta? <a routerLink="/register" class="login-link-a">Regístrate aquí</a>
+    </div>
+  </div>
+</div>

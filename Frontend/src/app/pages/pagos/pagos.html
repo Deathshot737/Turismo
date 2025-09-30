@@ -1,0 +1,82 @@
+<section class="pagos-wrapper">
+  <div style="position:absolute;left:-9999px;top:-9999px;">DEBUG PAGOS</div>
+  <noscript>Necesitas habilitar JavaScript para ver el formulario de pagos.</noscript>
+  <div class="debug-pagos" style="font-size:10px;opacity:.25;position:absolute;top:4px;right:8px;pointer-events:none;">Paso: {{paso()}} | Monto: {{monto()}} | Concepto: {{concepto()}}</div>
+  <h1>Pago seguro</h1>
+  <div class="pasos-indicador">
+    <div class="paso" [class.activo]="paso()===1">1. Monto</div>
+    <div class="paso" [class.activo]="paso()===2">2. Datos</div>
+    <div class="paso" [class.activo]="paso()===3">3. Método</div>
+    <div class="paso" [class.activo]="paso()===4">4. Confirmar</div>
+  </div>
+
+  @if (error()) {<div class="alerta-error">{{error()}}</div>}
+  @if (exito()) {<div class="alerta-exito">{{exito()}}</div>}
+
+  @if (paso() === 1) {
+    <div class="card-form">
+      <label>Monto (USD)</label>
+  <input #montoField type="number" min="1" [value]="monto()" (input)="monto.set(montoField.valueAsNumber)">
+      <label>Concepto / Referencia</label>
+  <input #conceptoField type="text" [value]="concepto()" (input)="concepto.set(conceptoField.value)">
+    </div>
+  }
+  @if (paso() === 2) {
+    <div class="card-form">
+      <label>Email</label>
+  <input #emailField type="email" [value]="email()" (input)="email.set(emailField.value)">
+      <label>Teléfono</label>
+  <input #telField type="tel" [value]="telefono()" (input)="telefono.set(telField.value)">
+    </div>
+  }
+  @if (paso() === 3) {
+    <div class="metodos-grid">
+      @for (m of metodos; track m.id) {
+        <div class="metodo-card" [class.seleccionado]="metodoSeleccionado()===m.id" (click)="seleccionarMetodo(m.id)">
+          <i class="fa {{m.icono}}"></i>
+          <h3>{{m.nombre}}</h3>
+          <p>{{m.descripcion}}</p>
+        </div>
+      }
+    </div>
+    @if (metodoSeleccionado()==='card') {
+      <div class="card-form tarjeta-form">
+        <label>Número de tarjeta</label>
+        <input #numField type="text" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" [value]="tarjetaNumero()" (input)="tarjetaNumero.set(numField.value)">
+        <label>Nombre en la tarjeta</label>
+        <input #nameField type="text" [value]="tarjetaNombre()" (input)="tarjetaNombre.set(nameField.value)">
+        <div class="fila-2">
+          <div>
+            <label>Expiración</label>
+            <input #expField type="month" [value]="tarjetaExp()" (change)="tarjetaExp.set(expField.value)">
+          </div>
+          <div>
+            <label>CVV</label>
+            <input #cvvField type="password" maxlength="4" [value]="tarjetaCvv()" (input)="tarjetaCvv.set(cvvField.value)">
+          </div>
+        </div>
+      </div>
+    }
+  }
+  @if (paso() === 4) {
+    <div class="resumen">
+      <h2>Resumen</h2>
+      <ul>
+        <li><strong>Monto:</strong> ${{monto()}}</li>
+        <li><strong>Concepto:</strong> {{concepto()}}</li>
+        <li><strong>Email:</strong> {{email()}}</li>
+        <li><strong>Teléfono:</strong> {{telefono()}}</li>
+        <li><strong>Método:</strong> {{metodoPagoActual()?.nombre || 'N/D'}}</li>
+      </ul>
+      <label class="chk-terminos">
+        <input type="checkbox" [checked]="confirmarTerminos()" (change)="toggleTerminos()"> Acepto términos y condiciones
+      </label>
+    </div>
+  }
+
+  <div class="acciones-pago">
+    @if (paso() > 1 && paso() < 4 && !exito()) {<button (click)="regresar()" class="btn-secundario">Atrás</button>}
+    @if (!exito()) {<button (click)="continuar()" class="btn-primario">{{ paso()===4 ? 'Finalizar' : 'Continuar' }}</button>}
+    @if (exito()) {<button (click)="reset()" class="btn-secundario">Nueva transacción</button>}
+  </div>
+</section>

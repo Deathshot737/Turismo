@@ -1,0 +1,100 @@
+/* Logo grande y texto pequeño en el navbar, igual que login */
+.login-logo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+.login-title {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+body {
+  background: #fff;
+  margin: 0;
+}
+.register-header {
+  width: 100%;
+  background: #1A4B7D;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: left;
+  padding: 1.2rem 0 1.2rem 2.5rem;
+  letter-spacing: 1px;
+}
+.container {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(26,75,125,0.10);
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+}
+.card h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1A4B7D;
+}
+.form-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+}
+.form-control:focus {
+  border-color: #1A4B7D;
+  outline: none;
+  }
+
+  
+.register-btn {
+	background: #1A4B7D;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 0.8rem;
+	font-weight: bold;
+	margin-top: 0.5rem;
+	width: 100%;
+	font-size: 1.1rem;
+	box-shadow: none;
+	transition: background 0.2s;
+}
+.register-btn:hover {
+	background: #F06C4F;
+	color: #fff;
+	border-color: #F06C4F;
+}
+.register-btn-cancel {
+	background:  #1A4B7D;
+	color: #fff;
+	border: 2px solid #1A4B7D;
+	border-radius: 8px;
+	padding: 0.8rem;
+	font-weight: bold;
+	margin-top: 0.5rem;
+	width: 100%;
+	font-size: 1.1rem;
+	box-shadow: none;
+	transition: background 0.2s;
+}
+.register-btn-cancel:hover {
+	background: #F06C4F;
+	color: #fff;
+	border-color: #F06C4F;
+}

@@ -1,0 +1,747 @@
+/* Botón especial para tarjetas de sitios turísticos */
+.sitio-btn-especial {
+  background: linear-gradient(90deg, #F06C4F 0%, #00A6B1 100%);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+}
+.sitio-btn-especial:hover {
+  background: linear-gradient(90deg, #00A6B1 0%, #F06C4F 100%);
+  transform: scale(1.07);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.sitios-turisticos {
+  margin: 2rem 0;
+}
+.sitios-filtro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.sitios-filtro label {
+  font-weight: bold;
+  color: #1A4B7D;
+}
+.sitios-filtro select {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #1A4B7D;
+  font-size: 1rem;
+}
+
+/* Botón reset filtros */
+.btn-filtro-reset {
+  background: #f3f3f3;
+  color: #444;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-filtro-reset:hover {
+  background: #e2e2e2;
+  color: #222;
+  border-color: #b5b5b5;
+}
+.btn-filtro-reset:active { background:#d6d6d6; }
+.btn-filtro-reset i {
+  font-style: normal;
+  font-weight: 600;
+}
+.sitios-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+.sitio-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(26,75,125,0.10);
+  width: 320px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+.sitio-card:hover {
+  box-shadow: 0 8px 32px rgba(0,166,177,0.18);
+  transform: translateY(-4px) scale(1.03);
+}
+.sitio-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+.sitio-info {
+  padding: 1.2rem;
+  text-align: center;
+}
+.sitio-info h3 {
+  color: #1A4B7D;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.sitio-info p {
+  color: #222;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+.sitio-ciudad-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  background: linear-gradient(90deg,#00A6B1,#F06C4F);
+  color:#fff;
+  font-size: .7rem;
+  letter-spacing:.75px;
+  padding: .35rem .85rem;
+  border-radius: 999px;
+  font-weight:600;
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
+  position: relative;
+  margin: .15rem 0 .65rem 0; /* asegura que quede separado del botón */
+  text-transform: uppercase;
+  border:1px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(2px);
+  animation: badgePop .35s ease-out;
+}
+.sitio-ciudad-badge i { font-size:.85rem; }
+.sitio-card:hover .sitio-ciudad-badge { box-shadow:0 4px 14px rgba(0,166,177,0.45); transform: translateY(-2px); }
+
+@keyframes badgePop {
+  0% { transform: scale(.6); opacity:0; }
+  60% { transform: scale(1.07); opacity:1; }
+  100% { transform: scale(1); }
+}
+.card-recomendacion {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(90deg, #00A6B1 60%, #F06C4F 100%);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: bold;
+  padding: 0.3rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,166,177,0.12);
+  z-index: 2;
+}
+.card-valoracion {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #fff;
+  color: #F06C4F;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,166,177,0.12);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.card-valoracion .fa-star {
+  color: #F06C4F;
+  font-size: 1rem;
+}
+/* --- HOTEL CARDS --- */
+.hotel-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(26,75,125,0.10);
+  width: 320px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+.hotel-card:hover {
+  box-shadow: 0 8px 32px rgba(0,166,177,0.18);
+  transform: translateY(-4px) scale(1.03);
+}
+.hotel-img-wrap {
+  position: relative;
+  width: 100%;
+}
+.hotel-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+.hotel-ciudad-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: #00A6B1;
+  color: #fff;
+  padding: 0.3rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,166,177,0.12);
+}
+.hotel-info {
+  padding: 1.2rem;
+  text-align: center;
+}
+.hotel-info h3 {
+  color: #1A4B7D;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.hotel-info p {
+  color: #222;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+.btn-reservar-hotel {
+  background: #F06C4F;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+.btn-reservar-hotel:hover {
+  background: #00A6B1;
+}
+.hospedaje-filtro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.hotel-filtro-label {
+  font-weight: bold;
+  color: #1A4B7D;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hotel-filtro-select {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #1A4B7D;
+  font-size: 1rem;
+}
+.hospedaje-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+.no-hoteles {
+  color: #F06C4F;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 2rem auto;
+  text-align: center;
+}
+.reservas-navbar {
+  width: 100%;
+  background: #1A4B7D;
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 2px 8px rgba(26,75,125,0.08);
+  margin-bottom: 0.5rem;
+}
+.reservas-navbar ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0;
+}
+.reservas-navbar li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.reservas-navbar li:hover {
+  background: #00A6B1;
+  color: #fff;
+}
+.reservas-navbar li.active {
+  background: #00A6B1;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,166,177,0.12);
+}
+.reservas-navbar i {
+  font-size: 1.7rem;
+  margin-bottom: 0.2rem;
+}
+.reservaciones {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 2rem;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.btn-primary {
+  background: #174A7C;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(26,75,125,0.25);
+  z-index: 1000;
+}
+.modal-detalles {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(26,75,125,0.18);
+  z-index: 1001;
+  width: 90vw;
+  max-width: 420px;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-cerrar {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #1A4B7D;
+  cursor: pointer;
+}
+.modal-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+}
+.modal-contenido h2 {
+  color: #1A4B7D;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+.modal-contenido p {
+  color: #222;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+.modal-mapa {
+  width: 100%;
+  height: 180px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0 0 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  border:1px solid #e3edf3;
+  background:#f8fafc;
+}
+.modal-mapa iframe {
+  width:100%;
+  height:100%;
+  border:0;
+}
+.modal-ciudad {
+  background: #00A6B1;
+  color: #fff;
+  padding: 0.3rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+.btn-reservar-modal {
+  background: #F06C4F;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+.btn-reservar-modal:hover {
+  background: #00A6B1;
+}
+.modal-acciones {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.75rem;
+  margin-top:.75rem;
+}
+.btn-pagar-ahora {
+  background:#f5f7fa;
+  color:#1A4B7D;
+  border:1px solid #1A4B7D;
+  padding:0.7rem 1.25rem;
+  border-radius:8px;
+  font-weight:bold;
+  font-size:0.95rem;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.btn-pagar-ahora:hover { background:#e2eef7; }
+.alerta-reserva {
+  background:#e6f9ed;
+  border:1px solid #34a853;
+  color:#1d6e36;
+  padding:.75rem 1rem;
+  border-radius:8px;
+  font-size:.9rem;
+  margin:0 0 1rem 0;
+  width:100%;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+}
+.transporte-bloque {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.transporte-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(26,75,125,0.10);
+  padding: 2rem 1.5rem;
+}
+.transporte-form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 180px;
+}
+.btn-buscar-transporte {
+  background: #00A6B1;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 1rem;
+  min-width: 160px;
+  box-shadow: 0 2px 8px rgba(0,166,177,0.12);
+}
+.btn-buscar-transporte:hover {
+  background: #F06C4F;
+}
+.transporte-rutas {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(26,75,125,0.10);
+  padding: 2rem 1.5rem;
+}
+.transporte-rutas h4 {
+  color: #1A4B7D;
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+.transporte-rutas-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+.transporte-card {
+  background: linear-gradient(135deg, #e0f7fa 0%, #fff 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(26,75,125,0.10);
+  width: 340px;
+  min-height: 160px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #b2ebf2;
+}
+.transporte-card:hover {
+  box-shadow: 0 8px 32px rgba(0,166,177,0.18);
+  transform: translateY(-4px) scale(1.03);
+  border-color: #00bcd4;
+}
+.transporte-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem 0.5rem 1.2rem;
+  font-weight: bold;
+  color: #00796b;
+  font-size: 1.1rem;
+}
+.transporte-origen, .transporte-destino {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.transporte-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1.2rem 1rem 1.2rem;
+  font-size: 1rem;
+  color: #1A4B7D;
+}
+.transporte-tipo {
+  background: #b2ebf2;
+  border-radius: 8px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.95rem;
+  color: #00796b;
+  font-weight: 500;
+}
+.transporte-hora {
+  color: #0097a7;
+  font-size: 0.95rem;
+}
+.transporte-precio {
+  color: #388e3c;
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+.btn-ver-detalles {
+  margin: 0 1.2rem 1rem 1.2rem;
+  padding: 0.5rem 1.2rem;
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(0,188,212,0.08);
+}
+.btn-ver-detalles:hover {
+  background: #0097a7;
+}
+.form-row-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+  justify-content: center;
+}
+.form-btn-field {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+/* === Vehículos === */
+.vehiculo-bloque {
+  margin: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.vehiculo-filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.2rem 1.5rem;
+  background: #fff;
+  padding: 1.8rem 1.5rem 1.3rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 28px rgba(26,75,125,0.10);
+  position: relative;
+}
+.vehiculo-filtros-grid::before {
+  content: "Filtros de vehículos";
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  background: linear-gradient(90deg,#00A6B1,#F06C4F);
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.vehiculo-filtros-grid .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.vehiculo-filtros-grid label {
+  font-weight: 600;
+  color: #1A4B7D;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.vehiculo-filtros-grid select,
+.vehiculo-filtros-grid input[type="number"],
+.vehiculo-filtros-grid input[type="date"] {
+  padding: 0.55rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #1A4B7D33;
+  background: #f9fcfd;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.vehiculo-filtros-grid select:focus,
+.vehiculo-filtros-grid input:focus {
+  outline: none;
+  border-color: #00A6B1;
+  box-shadow: 0 0 0 3px rgba(0,166,177,0.18);
+}
+.vehiculo-filtros-grid .form-btn-field {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+}
+.vehiculo-mensaje-error {
+  background: #ffe8e4;
+  color: #c0392b;
+  border: 1px solid #ffb5ab;
+  padding: 0.9rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 500;
+  max-width: 680px;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px rgba(192,57,43,0.12);
+}
+.vehiculo-card .vehiculo-atributos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem 0.6rem;
+  margin: 0.8rem 0 0.5rem;
+  font-size: 0.8rem;
+  text-align: left;
+  color: #1A4B7D;
+}
+.vehiculo-card .vehiculo-atributos span {
+  background: #f1fafd;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  font-weight: 500;
+}
+.vehiculo-card .vehiculo-atributos i {
+  color: #00A6B1;
+}
+@media (max-width: 760px) {
+  .vehiculo-filtros-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    padding: 1.4rem 1.1rem 1rem;
+  }
+  .vehiculo-filtros-grid::before { left: 12px; }
+  .vehiculo-card .vehiculo-atributos { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .vehiculo-filtros-grid { grid-template-columns: 1fr; }
+  .vehiculo-card { width: 100%; }
+}
+
+/* === Acciones inline añadidas (reservar / pagar / detalles) === */
+.card-acciones-inline, .transporte-acciones-inline {
+  display:flex;
+  gap:.45rem;
+  margin-top:.55rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn-pagar-inline {
+  background:linear-gradient(90deg,#00A6B1,#F06C4F);
+  color:#fff;
+  border:none;
+  padding:.55rem .9rem;
+  border-radius:8px;
+  font-size:.75rem;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  box-shadow:0 2px 6px rgba(0,166,177,.35);
+  font-weight:600;
+  letter-spacing:.5px;
+}
+.btn-pagar-inline:hover { filter:brightness(1.08); }
+.btn-ver-detalles-sm {
+  background:#eef5fa;
+  border:none;
+  padding:.55rem .7rem;
+  border-radius:8px;
+  cursor:pointer;
+  color:#174A7C;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.8rem;
+  box-shadow:0 2px 6px rgba(23,74,124,.15);
+}
+.btn-ver-detalles-sm:hover { background:#dbe8ef; }
+.transporte-acciones-inline .btn-reservar-hotel,
+.transporte-acciones-inline .btn-pagar-inline {
+  padding:.45rem .6rem;
+  font-size:.7rem;
+}

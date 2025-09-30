@@ -1,0 +1,133 @@
+body {
+	background: #fff;
+	margin: 0;
+}
+.login-header {
+	width: 100%;
+	background: #1A4B7D;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	gap: 1.2rem;
+	padding: 1.2rem 0 1.2rem 2.5rem;
+	font-size: 2rem;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+.login-logo {
+	height: 80px;
+	width: auto;
+	object-fit: contain;
+}
+.login-title {
+	font-size: 1rem;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+.login-container {
+	min-height: 70vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #fff;
+}
+.login-card {
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 4px 24px rgba(26,75,125,0.10);
+	padding: 2rem;
+	max-width: 400px;
+	width: 100%;
+}
+.login-title-form {
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	color: #1A4B7D;
+	text-align: center;
+}
+.login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.login-group {
+	display: flex;
+	flex-direction: column;
+}
+.login-label {
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+	color: #222;
+}
+.login-input {
+	border-radius: 8px;
+	border: 1px solid #d1d5db;
+	padding: 0.7rem;
+	margin-bottom: 0.5rem;
+	width: 100%;
+	font-size: 1rem;
+}
+.login-input:focus {
+	border-color: #1A4B7D;
+	outline: none;
+}
+.login-btn {
+	background: #1A4B7D;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 0.8rem;
+	font-weight: bold;
+	margin-top: 0.5rem;
+	width: 100%;
+	font-size: 1.1rem;
+	box-shadow: none;
+	transition: background 0.2s;
+}
+.login-btn:hover {
+	background: #F06C4F;
+	color: #fff;
+	border-color: #F06C4F;
+}
+.login-btn-cancel {
+	background:  #1A4B7D;
+	color: #fff;
+	border: 2px solid #1A4B7D;
+	border-radius: 8px;
+	padding: 0.8rem;
+	font-weight: bold;
+	margin-top: 0.5rem;
+	width: 100%;
+	font-size: 1.1rem;
+	box-shadow: none;
+	transition: background 0.2s;
+}
+.login-btn-cancel:hover {
+	background: #F06C4F;
+	color: #fff;
+	border-color: #F06C4F;
+}
+.login-error {
+	color: #D32F2F;
+	font-size: 0.95rem;
+}
+.login-message {
+	margin-top: 1rem;
+	text-align: center;
+	color: #D32F2F;
+	font-size: 1rem;
+}
+.login-link {
+	text-align: center;
+	margin-top: 0.5rem;
+	font-size: 0.98rem;
+}
+.login-link-a {
+	color: #F06C4F;
+	text-decoration: underline;
+	font-weight: 500;
+}
+.login-link-a:hover {
+	color: #00A6B1;
+}
+/*hola*/

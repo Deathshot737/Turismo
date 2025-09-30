@@ -1,0 +1,90 @@
+{\rtf1\ansi\deff0
+{\fonttbl
+{\f0 Arial;}
+{\f1 Courier New;}
+}
+{\colortbl;\red0\green0\blue0;\red32\green64\blue96;\red0\green102\blue204;\red200\green0\blue0;}
+\paperw16840\paperh11907\margl1440\margr1440\margt1440\margb1440
+
+\pard\qc\f0\fs40\b INFORME DE FUNCIONALIDADES DEL RETO\b0\par
+\pard\qc\fs24 Versión 1.0 - Fecha: 29/09/2025\par
+\pard\qc Autor: Equipo Desarrollo Frontend Turismo\par
+\pard\qc\fs20 \par
+
+\pard\fs28\b 1. Resumen Ejecutivo\b0\par
+\pard\fs20 La aplicación web (Angular standalone) centraliza la exploración y reserva de servicios turísticos (sitios, hospedaje, restaurantes, transporte y vehículos), incorporando flujo de reservas, pago simulado y autenticación con roles. Se almacena estado en \i localStorage\i0 y se prepara la base para futuras integraciones backend (validación real de pagos, disponibilidad dinámica y panel administrativo avanzado).\par
+
+\pard\fs28\b 2. Objetivo del Reto\b0\par
+\pard\fs20 Diseñar e implementar un módulo unificado que permita a un turista gestionar reservas de múltiples categorías en un solo portal, mejorando trazabilidad, usabilidad y escalabilidad funcional.\par
+
+\pard\fs28\b 3. Alcance Implementado\b0\par
+\pard\fs20 \bullet Exploración de catálogos (sitios, hoteles, restaurantes, rutas de transporte, vehículos).\par
+\pard\fs20 \bullet Creación de reservas en estado pendiente y transición a pagado.\par
+\pard\fs20 \bullet Flujo de pago multi-paso parametrizable por URL.\par
+\pard\fs20 \bullet Validaciones esenciales (fechas, solapamiento vehículo, capacidad transporte, formulario pago).\par
+\pard\fs20 \bullet Persistencia local y restauración de sesión (token + usuario + rol).\par
+\pard\fs20 \bullet UI adaptada según rol (turista / proveedor / admin).\par
+
+\pard\fs28\b 4. Arquitectura Técnica (Frontend)\b0\par
+\pard\fs20 \b Framework:\b0 Angular (Standalone Components + Signals).\par
+\pard\fs20 \b Servicios Principales:\b0 AuthService (sesión y roles), ReservaService (CRUD, solapamientos, ocupación transporte).\par
+\pard\fs20 \b Estado Local:\b0 uso de signals para filtros, pasos de pago y modales.\par
+\pard\fs20 \b Persistencia:\b0 localStorage (token, user, reservas, ocupación rutas).\par
+\pard\fs20 \b Navegación:\b0 rutas y guards por rol; query params para inyección de contexto en pagos.\par
+\pard\fs20 \b Seguridad Básica:\b0 token + fallback decode JWT para resiliencia.\par
+
+\pard\fs28\b 5. Funcionalidades Implementadas\b0\par
+\pard\fs20 \b Autenticación y Roles\b0: Login, registro con auto-login, restauración transparente, mapeo rol_id, logout.\par
+\pard\fs20 \b Catálogo Turístico\b0: Listados filtrables de sitios, hoteles, restaurantes, rutas de transporte y vehículos.\par
+\pard\fs20 \b Reservas\b0: Creación de reservas pendientes; validación de solapamiento (vehículos); control de capacidad (transporte); transición a pagado sin duplicar.\par
+\pard\fs20 \b Pagos\b0: Proceso en 4 pasos (definición, datos contacto, método, confirmación) + precarga por query params.\par
+\pard\fs20 \b Mapas\b0: Embeds Google Maps (búsqueda por ciudad o nombre).\par
+\pard\fs20 \b Persistencia\b0: localStorage para reservas y ocupación de rutas.\par
+\pard\fs20 \b UX\b0: Mensajes de feedback (reserva creada, pago exitoso), menú usuario condicional.\par
+
+\pard\fs28\b 6. Flujo de Usuario (Turista)\b0\par
+\pard\fs20 1) Accede o se registra (auto-login).\par
+\pard\fs20 2) Filtra y selecciona recurso (modal).\par
+\pard\fs20 3) Crea reserva (pendiente) y/o inicia pago directo.\par
+\pard\fs20 4) Completa pasos de pago → estado pasa a pagado.\par
+\pard\fs20 5) Consulta historial en pantalla de mis reservas.\par
+
+\pard\fs28\b 7. Modelo de Datos de Reserva (Resumen)\b0\par
+\pard\fs20 id, tipo, usuarioEmail, referencia, fechaCreacion, (fechaInicio/fechaFin para hotel/vehículo), monto, estado (pendiente/pagado/cancelado), pasajeros/días según el tipo.\par
+
+\pard\fs28\b 8. Validaciones Clave\b0\par
+\pard\fs20 \bullet Vehículo: Rango de fechas válido y sin solapamiento.\par
+\pard\fs20 \bullet Transporte: Verificación de capacidad (ocupación acumulada).\par
+\pard\fs20 \bullet Pago: Datos mínimos tarjeta / aceptación términos.\par
+\pard\fs20 \bullet Formularios: Email y teléfono obligatorios.\par
+
+\pard\fs28\b 9. Estados de Reserva\b0\par
+\pard\fs20 \b pendiente\b0 → creación inicial.\par
+\pard\fs20 \b pagado\b0 → tras completar flujo de pago (update sin duplicar).\par
+\pard\fs20 \b cancelado\b0 → marcado por acción futura (servicio ya posee método cancel).\par
+
+\pard\fs28\b 10. Riesgos Identificados\b0\par
+\pard\fs20 1) Datos sólo locales (pérdida al limpiar navegador).\par
+\pard\fs20 2) Disponibilidad hoteles no controlada aún.\par
+\pard\fs20 3) Liberación de capacidad transporte al cancelar no implementada.\par
+\pard\fs20 4) Pago simulado (sin gateway real).\par
+
+\pard\fs28\b 11. Backlog Priorizado\b0\par
+\pard\fs20 \b Alta:\b0 Panel admin de reservas; disponibilidad hoteles; liberación capacidad transporte.\par
+\pard\fs20 \b Media:\b0 Generación tickets/QR; itinerario multi-destino; estado "confirmada" intermedio.\par
+\pard\fs20 \b Baja:\b0 Pasarela real (Stripe/PayPal); notificaciones email.\par
+
+\pard\fs28\b 12. Roadmap Propuesto (Sprints)\b0\par
+\pard\fs20 Semana 1: Panel admin + disponibilidad hoteles + liberar capacidad.\par
+\pard\fs20 Semana 2: Tickets/QR + itinerario + precios hotel dinámicos.\par
+\pard\fs20 Semana 3: Estado confirmada + emails + mejoras historial reservas.\par
+\pard\fs20 Semana 4: Integración pasarela real + pruebas end-to-end.\par
+
+\pard\fs28\b 13. Métricas Futuras\b0\par
+\pard\fs20 Conversión pendiente→pagado; ocupación rutas; tiempo medio de pago; ratio cancelaciones.\par
+
+\pard\fs28\b 14. Conclusión\b0\par
+\pard\fs20 Se dispone de una base funcional consolidada y extensible. Las siguientes iteraciones deben enfocarse en disponibilidad real, panel administrativo y fortalecimiento del ciclo de vida de la reserva (confirmación/ticket). La estructura actual reduce costo de integración backend y acelera la evolución del producto.\par
+
+\pard\qc\fs18 --- Fin del Documento ---\par
+}

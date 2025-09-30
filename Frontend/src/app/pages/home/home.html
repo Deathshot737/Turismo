@@ -1,0 +1,152 @@
+
+
+
+<div class="carousel-container">
+  <div class="custom-carousel">
+    <button class="carousel-arrow left" (click)="prevSlide()">&#10094;</button>
+    <div class="carousel-slide">
+      <img [src]="slides[current].img" alt="slide" />
+      <div class="carousel-caption">
+        <h1>¡Bienvenido a ExploraNica!</h1>
+        <h3>{{ slides[current].frase }}</h3>
+        <button class="carousel-btn">Ver más</button>
+      </div>
+    </div>
+    <button class="carousel-arrow right" (click)="nextSlide()">&#10095;</button>
+    <div class="carousel-indicators">
+      @for (slide of slides; track slide) {
+        <span [class.active]="$index === current" (click)="goToSlide($index)"></span>
+      }
+    </div>
+  </div>
+</div>
+
+<section class="home-main-cards" style="display:flex; justify-content:center; gap:2rem; margin:3rem 0; flex-wrap:wrap;">
+  <div class="main-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:350px; text-align:center; padding:2rem;">
+    <i class="fa-solid fa-map-location-dot fa-4x" style="color:#174A7C; margin-bottom:1rem;"></i>
+    <h2 style="color:#174A7C; font-size:1.5rem; margin-bottom:0.5rem;">Explora Rutas y Destinos</h2>
+    <p style="color:#174A7C;">Descubre rutas, volcanes, cultura y naturaleza en Nicaragua.</p>
+    <a routerLink="/rutas" class="main-card-btn" style="display:inline-block; margin-top:1rem; background:#174A7C; color:#fff; padding:0.5rem 1.5rem; border-radius:8px; text-decoration:none; font-weight:bold;">Explorar</a>
+  </div>
+  <div class="main-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:350px; text-align:center; padding:2rem;">
+    <i class="fa-solid fa-robot fa-4x" style="color:#00B2C6; margin-bottom:1rem;"></i>
+    <h2 style="color:#00B2C6; font-size:1.5rem; margin-bottom:0.5rem;">Asistente Virtual ExploraNica</h2>
+    <p style="color:#174A7C;">Recibe ayuda personalizada para planificar tu viaje y descubrir lugares recomendados.</p>
+    <a routerLink="/asistente" class="main-card-btn" style="display:inline-block; margin-top:1rem; background:#00B2C6; color:#fff; padding:0.5rem 1.5rem; border-radius:8px; text-decoration:none; font-weight:bold;">Ir al Asistente</a>
+  </div>
+  <div class="main-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:350px; text-align:center; padding:2rem;">
+    <i class="fa-solid fa-masks-theater fa-4x" style="color:#4CB648; margin-bottom:1rem;"></i>
+    <h2 style="color:#4CB648; font-size:1.5rem; margin-bottom:0.5rem;">Rincón Cultural</h2>
+    <p style="color:#174A7C;">Sabores, historias y tradiciones de Nicaragua. Explora la cultura y gastronomía local.</p>
+    <a routerLink="/cultura" class="main-card-btn" style="display:inline-block; margin-top:1rem; background:#4CB648; color:#fff; padding:0.5rem 1.5rem; border-radius:8px; text-decoration:none; font-weight:bold;">Ver más</a>
+  </div>
+</section>
+
+<section class="home-mapa" style="margin:3rem 0; text-align:center;">
+  <h2 style="color:#174A7C; font-size:2rem; margin-bottom:1rem;">Mapa Interactivo de Nicaragua</h2>
+  <div style="display:flex; justify-content:center;">
+  <iframe src="https://www.google.com/maps?q=Nicaragua&hl=es&z=7&output=embed" width="800" height="400" style="border:0; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08);" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+
+
+<section class="home-destinos" style="margin:3rem 0;">
+  <h2 style="text-align:center; color:#174A7C; font-size:2rem; margin-bottom:2rem;">Destinos Turísticos Destacados</h2>
+  <div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;">
+    <div class="destino-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:280px; text-align:center; padding:1.5rem;">
+      <img src="img/Home/Granada.webp" alt="Granada" style="width:100%; border-radius:12px; margin-bottom:1rem; height:160px; object-fit:cover;" />
+      <h3 style="color:#174A7C; font-size:1.2rem; margin-bottom:0.5rem;">Granada</h3>
+      <p style="color:#174A7C; font-size:1rem;">Ciudad colonial, historia y belleza arquitectónica junto al lago Nicaragua.</p>
+      <a routerLink="/destino/granada" class="main-card-btn" style="display:inline-block; margin-top:1rem; background:#174A7C; color:#fff; padding:0.4rem 1.2rem; border-radius:8px; text-decoration:none; font-weight:bold;">Ver más</a>
+    </div>
+    <div class="destino-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:280px; text-align:center; padding:1.5rem;">
+      <img src="img/Home/Ometepe.jpeg" alt="Ometepe" style="width:100%; border-radius:12px; margin-bottom:1rem; height:160px; object-fit:cover;" />
+      <h3 style="color:#174A7C; font-size:1.2rem; margin-bottom:0.5rem;">Isla de Ometepe</h3>
+      <p style="color:#174A7C; font-size:1rem;">Naturaleza, volcanes y aventura en la isla más grande del lago Nicaragua.</p>
+      <a routerLink="/destino/ometepe" class="main-card-btn" style="display:inline-block; margin-top:1rem; background:#174A7C; color:#fff; padding:0.4rem 1.2rem; border-radius:8px; text-decoration:none; font-weight:bold;">Ver más</a>
+    </div>
+    <div class="destino-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:280px; text-align:center; padding:1.5rem;">
+      <img src="img/Home/San Juan del Sur.webp" alt="San Juan del Sur" style="width:100%; border-radius:12px; margin-bottom:1rem; height:160px; object-fit:cover;" />
+      <h3 style="color:#174A7C; font-size:1.2rem; margin-bottom:0.5rem;">San Juan del Sur</h3>
+      <p style="color:#174A7C; font-size:1rem;">Playas paradisíacas, surf y vida nocturna en la costa del Pacífico.</p>
+      <a routerLink="/destino/sanjuan" class="main-card-btn" style="display:inline-block; margin-top:1rem; background:#174A7C; color:#fff; padding:0.4rem 1.2rem; border-radius:8px; text-decoration:none; font-weight:bold;">Ver más</a>
+    </div>
+    <div class="destino-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:280px; text-align:center; padding:1.5rem;">
+      <img src="img/Home/Masaya.webp" alt="Masaya" style="width:100%; border-radius:12px; margin-bottom:1rem; height:160px; object-fit:cover;" />
+      <h3 style="color:#174A7C; font-size:1.2rem; margin-bottom:0.5rem;">Masaya</h3>
+      <p style="color:#174A7C; font-size:1rem;">Cultura, artesanías y el impresionante volcán Masaya.</p>
+      <a routerLink="/destino/masaya" class="main-card-btn" style="display:inline-block; margin-top :1rem; background:#174A7C; color:#fff; padding:0.4rem 1.2rem; border-radius:8px; text-decoration:none; font-weight:bold;">Ver más</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-testimonios" style="margin:3rem 0;">
+  <h2 style="text-align:center; color:#174A7C; font-size:2rem; margin-bottom:2rem;">Testimonios de Turistas</h2>
+  <div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;">
+    <div class="testimonio-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:320px; text-align:center; padding:1.5rem;">
+      <i class="fa-solid fa-user fa-2x" style="color:#174A7C; margin-bottom:1rem;"></i>
+      <div class="testimonio-estrellas" style="margin-bottom:1rem;">
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-regular fa-star" style="color:#FFD700;"></i>
+      </div>
+      <p style="font-size:1.1rem; color:#174A7C; font-style:italic;">“ExploraNica me ayudó a descubrir lugares increíbles y a reservar todo de forma segura. ¡Repetiría la experiencia!”</p>
+      <p style="margin-top:1rem; font-weight:bold; color:#174A7C;">Carlos G.</p>
+    </div>
+    <div class="testimonio-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:320px; text-align:center; padding:1.5rem;">
+      <i class="fa-solid fa-user fa-2x" style="color:#174A7C; margin-bottom:1rem;"></i>
+      <div class="testimonio-estrellas" style="margin-bottom:1rem;">
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+      </div>
+      <p style="font-size:1.1rem; color:#174A7C; font-style:italic;">“La atención personalizada y la variedad de destinos hacen de ExploraNica mi plataforma favorita para viajar.”</p>
+      <p style="margin-top:1rem; font-weight:bold; color:#174A7C;">María L.</p>
+    </div>
+    <div class="testimonio-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:320px; text-align:center; padding:1.5rem;">
+      <i class="fa-solid fa-user fa-2x" style="color:#174A7C; margin-bottom:1rem;"></i>
+      <div class="testimonio-estrellas" style="margin-bottom:1rem;">
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
+        <i class="fa-regular fa-star" style="color:#FFD700;"></i>
+        <i class="fa-regular fa-star" style="color:#FFD700;"></i>
+      </div>
+      <p style="font-size:1.1rem; color:#174A7C; font-style:italic;">“Recomiendo ExploraNica por su seguridad y facilidad para encontrar experiencias auténticas.”</p>
+      <p style="margin-top:1rem; font-weight:bold; color:#174A7C;">Ana R.</p>
+    </div>
+  </div>
+</section>
+
+<section class="home-ventajas" style="margin:3rem 0;">
+  <h2 style="text-align:center; color:#174A7C; font-size:2rem; margin-bottom:2rem;">¿Por qué elegir ExploraNica?</h2>
+  <div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;">
+    <div class="ventaja-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:260px; text-align:center; padding:1.5rem;">
+      <i class="fa-solid fa-shield-halved fa-3x" style="color:#174A7C; margin-bottom:1rem;"></i>
+      <h3 style="color:#174A7C; font-size:1.1rem; margin-bottom:0.5rem;">Seguridad y confianza</h3>
+      <p style="color:#174A7C; font-size:1rem;">Pagos protegidos y datos verificados para tu tranquilidad.</p>
+    </div>
+    <div class="ventaja-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:260px; text-align:center; padding:1.5rem;">
+      <i class="fa-solid fa-headset fa-3x" style="color:#00B2C6; margin-bottom:1rem;"></i>
+      <h3 style="color:#00B2C6; font-size:1.1rem; margin-bottom:0.5rem;">Atención personalizada 24/7</h3>
+      <p style="color:#174A7C; font-size:1rem;">Soporte y ayuda en todo momento para tu viaje.</p>
+    </div>
+    <div class="ventaja-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:260px; text-align:center; padding:1.5rem;">
+      <i class="fa-solid fa-globe fa-3x" style="color:#4CB648; margin-bottom:1rem;"></i>
+      <h3 style="color:#4CB648; font-size:1.1rem; margin-bottom:0.5rem;">Experiencias auténticas</h3>
+      <p style="color:#174A7C; font-size:1rem;">Descubre cultura, naturaleza y destinos únicos en Nicaragua.</p>
+    </div>
+    <div class="ventaja-card" style="background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); width:260px; text-align:center; padding:1.5rem;">
+      <i class="fa-solid fa-bolt fa-3x" style="color:#F26C4F; margin-bottom:1rem;"></i>
+      <h3 style="color:#F26C4F; font-size:1.1rem; margin-bottom:0.5rem;">Reserva fácil y rápida</h3>
+      <p style="color:#174A7C; font-size:1rem;">Plataforma intuitiva para planificar y reservar tu viaje en minutos.</p>
+    </div>
+  </div>
+</section>
+
+
+
