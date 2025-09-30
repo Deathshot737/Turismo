@@ -1,4 +1,6 @@
 **/__pycache__/
 *.pycgi
 *.venv/
-*.vscode/
+*.vscode/Frontend/FUNCIONALIDADES_REPORTE.md
+Frontend/CAPTURAS_INTERFAZ_PLAN.md
+Frontend/Informe_Funcionalidades.rtf
